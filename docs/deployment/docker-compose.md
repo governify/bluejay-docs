@@ -100,13 +100,13 @@ Now, open a terminal in the root folder and execute setupAdvanced.sh script:
 ```
 ./setupAdvanced.sh 
 ```
-![Setup Wizard](/img/deployment/setup_wizard_main.PNG)
+![Setup Wizard](/img/deployment/setup_wizard_main.png)
 
 You have to input "1" and press enter in order to go to the configuration menu.
 
 You should now follow the steps in order to accomplish the system deployment. This are the different options:
 
-![Setup Wizard](/img/deployment/setup_wizard_configure.PNG)
+![Setup Wizard](/img/deployment/setup_wizard_configure.png)
     
 **1. (Optional) Docker and Docker Compose installation (yum/AWS):** When used it installs all the needed tools for the system to function  using yum package manager.
 

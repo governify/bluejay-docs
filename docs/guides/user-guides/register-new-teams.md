@@ -12,7 +12,7 @@ hide_table_of_contents: false
 
 As explained [here](http://localhost:3000/customization/configuration#scope-file), the scope.json contains all the information about courses, teams and members available as an API (Scope Manager) for the other components to have access to it.
 
-![Successful Join](/img/guides/register-new-teams/success.PNG)
+![Successful Join](/img/guides/register-new-teams/success.png)
 
 
 ## Join
