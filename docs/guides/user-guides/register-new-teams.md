@@ -23,7 +23,7 @@ By default, it can be accessed through https://join[BLUEJAY_SERVICES_PREFIX][BLU
 
 **Bear in mind** that when registering a team to a course, the system will look for:
 
-- A **TPA template** called the same as the course in the assets folder `/public/renders/tpa` and use it to generate the TPA for the team. In case there this template does not exist, it will use template.yaml as TPA template. For more information about the TPA refer to the <a href="/customization/agreement_modeling">Agreement Modeling</a> section.
+- A **TPA template** called the same as the course in the assets folder `/public/renders/tpa` and use it to generate the TPA for the team. In case there this template does not exist, it will use template.yaml as TPA template. For more information about the TPA refer to the Agreement Modeling section.
 
 - A **director script** and a **json** called both the same as the course in the assets folder `/public/director`. The json contains the execution information (interval, start and end) to enable it at the Director to call the script. In case these files don't exist, the director won't be called. These files have to be configured for the system to automatically generate data about the team. For example, to automatically compute metrics for a course named `class01` the files would be the following: [class01.js](https://github.com/governify/bluejay-infrastructure/blob/main/assets/public/director/class01.js) and [class01.json](https://github.com/governify/bluejay-infrastructure/blob/main/assets/public/director/class01.json).
 
@@ -34,7 +34,7 @@ It offers an interface that works in three steps:
 
 **1.** First the GitHub Repository URL is entered and "Check" button is pressed. It will check for any mistakes on the info.yml file and, if everything is ok a second section will appear. In case you still don't have the info.yml file in the root of your repo (main or master branch) you can check this [template](https://github.com/governify/audited-project-template/blob/main/info.yml) or this [example](https://github.com/governifyauditor/goldenflow-showcase-project/blob/main/info.yml) and add it before continuing.
 
-**2.** A new input will appear asking for the Course name will appear. By pressing "Join" the system will check that this course exists in the scopes.json. If it doesn't please check out this <a href="/quickstart/auditing-agile-2.0#scope.json">link</a> and add an object for storing a new course with a name for the course of your desire. Remember to restart the Scope Manager before continuing if you modified the scopes.json.
+**2.** A new input will appear asking for the Course name will appear. By pressing "Join" the system will check that this course exists in the scopes.json. If it doesn't add an object for storing a new course with a name for the course of your desire. Remember to restart the Scope Manager before continuing if you modified the scopes.json.
 
 **3.** If the course exists and the project was not registered previously, there will appear a success message and the system will be already registered! A badge with it's markdown will appear for teams to copy it into their README.md file for ease of access and they can click on it to access the dashboard. If the team had already registered before the badge will appear but it won't register the team again.
 
