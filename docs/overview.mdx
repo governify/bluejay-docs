@@ -1,0 +1,60 @@
+---
+slug: /
+title: Overview
+sidebar_position: 1 # Sets this doc to the first position in the sidebar
+description: Introduction to the project
+hide_table_of_contents: false
+---
+
+import ReactPlayer from 'react-player'
+
+# Overview
+
+---
+
+As explained in Governify documentation, Governify is a service agreement management framework that boosts the service governance by supporting audits in an automated way. Among its use cases, Governify can be used to [audit agile teams](https://docs.governify.io/use-cases/auditing-agile), which is the purpose for which Bluejay Infrastructure was created.
+
+Bluejay Infrastructure is a Governify-based infrastructure that allows to audit agile teams in a simple way. It is composed of a subset of Governify microservices that can be deployed either in a single machine or in a cluster. Bluejay access multiple sources to gather information about development teams, such as GitLab, Jira, Slack, etc. and uses this information to check if those teams are being compliant with a [Team Practices Agreement (TPA)](/customization/agreement-modeling/team-practices-agreement) which includes metrics and guarantees related to the agile methodology.
+
+## Bluejay showcase video
+
+<ReactPlayer playing controls url='https://www.youtube.com/watch?v=WathxnobIzc' width='100%' />
+
+## Quick Tour
+
+The main interaface is accesible from ui.bluejay.*[YourDomain]*
+The default credentials for this interface are: 
+ * User: governify-admin 
+ * Password: governify-project
+
+:::note
+This credentials can be changed in the .env file.
+:::
+
+In this interface you should be able to see a list of all the teams you have in your configuration. By default, it comes with a predefined example project.
+
+![Projects list interface of Governify](/img/overview/ui-interface.PNG)
+
+To start auditing the example project simply click on the "Create TPA" button right next to the team's name (project01). This will create a simple predefined agreement for that team to start auditting it.
+
+![Create TPA Button](/img/overview/create_tpa.png)
+
+A new tab will open and, once the agreement is created, the TPA view of the project should appear. It contains information about it along the guarantees and metrics in use.
+
+![TPA view](/img/overview/tpa_view.PNG)
+
+To calculate data for this project, the top-right blue button `Calculate Metrics` has to be clicked and a form will apear.
+
+![Calculate Metrics form](/img/overview/compute_metrics.PNG)
+
+The dates should be the same as the image in order to appear the correct information and the checkbox has to be accepted. By clicking the `Compute` button the system will start computing and, if everything goes well, after 5-20 seconds, the `TPA data is being generated for the period.` alert message will change to `Points creation ended.`
+
+Clicking the `Dashboard` green button at the top-right corner, a new tab will open. The default username and password are governify-admin and governify-project.
+
+:::note
+This credentials can be changed, once logged, going to the icon in the bottom left part of the Dashboard, clicking on preferences, and accessing the section Change password at the top of the page.
+:::
+
+Once logged, the dashboard for the project will be opened where all the audit data can be viewed.
+
+![Dashboard of the example project](/img/overview/dashboard.png)
