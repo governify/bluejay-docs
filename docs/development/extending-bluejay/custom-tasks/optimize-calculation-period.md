@@ -20,7 +20,7 @@ This script is one of the [Custom Tasks of Extending Governify](https://docs.gov
 4. Open the dropdown and select OptimizeCalculationPeriod.
 
 
-![load optimize](/img/guides/optimize/load-optimize.png)
+![load optimize](/img/development/custom-tasks/optimize/load-optimize.png)
 
 ## Configure the script using Configuration.json
 
@@ -48,7 +48,7 @@ btch3 16h00 -> Team5
 ## Run the script
 **Click run** and you will see the results on the log of **Result.json:** (this is a new example)
 
-![output optimize](/img/guides/optimize/output-optimize.png)
+![output optimize](/img/development/custom-tasks/optimize/output-optimize.png)
 
 
 
