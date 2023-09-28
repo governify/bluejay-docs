@@ -23,7 +23,7 @@ Clone latest release of [Bluejay Infrastructure repository](https://github.com/g
 git clone https://github.com/governify/bluejay-infrastructure.git
 ```
 ## 2. Add '.env' file
-**3.** The `.env` file is used to configure environmental variables used in your specific deployment. The content of this file must be the following:
+The `.env` file is used to configure environmental variables used in your specific deployment. The content of this file must be the following:
 ```
 # GENERAL (Mandatory for deployment)
 
@@ -64,8 +64,54 @@ KEY_SCOPE_MANAGER=bluejay-scopes-private-key
 COMPOSE_HTTP_TIMEOUT=200
 ```
 ### 2.1 Create Github token
+Generating a Github token is an essential step. With this key Blujay is able to communicate with the app to retrieve information about the repository that you want to audit. This token is not generated in any specific repo, it serves as a personal private API key in your account.
+- Navigate to your github account and then go to  `Settings>Developer Settings` (at the end of the menu).
+- Go to `Personal access tokens > Tokens (classic)`
+- Click on `Generate new token > Generate new token (classic)` 
+- The scopes you select are up to you, but you need at least repository access.
+- Click on `Generate token` and make sure to copy the given key and paste it into `KEY_GITHUB` in the `.env` file.
 
 ## 3. Create scopes.json
+Within the `assets/private/scope-manager` directory, you will discover a file named `scopes.json.example`. This file serves as a blueprint, guiding us in the creation of our custom `scopes.json`, which will be located within the same directory as the example. You can copy the following contents into your scopes file as a test.
+```
+{
+    "development": [
+        {
+            "classId": "test",
+            "identities": [],
+            "credentials": [],
+            "projects": [
+                {
+                    "name": "Bluejay test",
+                    "projectId": "project01",
+                    "owner": "governify",
+                    "identities": [
+                        {
+                            "source": "github",
+                            "repository": "bluejay-infrastructure",
+                            "repoOwner": "governify"
+                        }
+                    ],
+                    "members": [
+                        {
+                            "memberId": 1,
+                            "identities": [
+                                {
+                                    "source": "github",
+                                    "username": "<YourGHname>"
+                                }
+                            ],
+                            "credentials": []
+                        }
+                    ],
+                    "credentials": []
+                }
+            ]
+        }
+    ]
+}
+```
+If you modify this file to add more projects or make any change, you will have to restart the `render` and `scope-manager` containers.
 
 ## 4. Deploy with Docker Compose
 Now we can deploy the system with the following command:
@@ -75,5 +121,11 @@ docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d
 
 Navigate to localhost:5100 to access the main page of Bluejay. A prompt like the following will pop up in your browser, where have to input the `USER_RENDER` and `PASS_RENDER` values specified in the `.env` file:
 ![Login](../../static/img/deployment/docker-quickstart/login-render.png)
+![BJ](../../static/img/deployment/docker-quickstart/render-bluejay.png)
 
 Governify ecosystem with bluejay services should have been deployed in your machine.
+
+To stop the containers use:
+```
+docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env down
+``` 
