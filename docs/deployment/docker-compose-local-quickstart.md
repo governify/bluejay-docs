@@ -127,5 +127,18 @@ Governify ecosystem with bluejay services should have been deployed in your mach
 
 To stop the containers use:
 ```
-docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env down
+docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env stop
+``` 
+
+You can easily restart them using:
+```
+docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env start
+``` 
+
+If you made a change in the configuration you will have to re-compose the containers using `down`and then using `up` or `up -d` again:
+
+```
+docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env down # stop and remove containers
+
+docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d # deploy
 ``` 
