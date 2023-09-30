@@ -1,7 +1,7 @@
 ---
 title: Kubernetes
 description: Kubernetes
-sidebar_position: 2 # Sets this doc to the first position in the sidebar
+sidebar_position: 3 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
 ---
 
