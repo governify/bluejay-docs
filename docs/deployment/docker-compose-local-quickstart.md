@@ -24,7 +24,7 @@ git clone https://github.com/governify/bluejay-infrastructure.git
 ```
 ## 2. Add '.env' file
 The `.env` file is used to configure environmental variables used in your specific deployment. The content of this file must be the following:
-```
+```yaml
 # GENERAL (Mandatory for deployment)
 
 GOV_INFRASTRUCTURE=http://host.docker.internal:5200/api/v1/public/infrastructure-local.yaml 
@@ -73,7 +73,7 @@ Generating a Github token is an essential step. With this key Blujay is able to 
 
 ## 3. Create scopes.json
 Within the `assets/private/scope-manager` directory, you will discover a file named `scopes.json.example`. This file serves as a blueprint, guiding us in the creation of our custom `scopes.json`, which will be located within the same directory as the example. You can copy the following contents into your scopes file as a test.
-```
+```json
 {
     "development": [
         {
@@ -126,18 +126,18 @@ Navigate to localhost:5100 to access the main page of Bluejay. A prompt like the
 Governify ecosystem with bluejay services should have been deployed in your machine.
 
 To stop the containers use:
-```
+```bash
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env stop
 ``` 
 
 You can easily restart them using:
-```
+```bash
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env start
 ``` 
 
 If you made a change in the configuration you will have to re-compose the containers using `down`and then using `up` or `up -d` again:
 
-```
+```bash
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env down # stop and remove containers
 
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d # deploy

@@ -37,7 +37,7 @@ git clone https://github.com/governify/bluejay-infrastructure.git
 ```
 
 **3.** Edit `.env` located at the root of the folder. This file contains all the environmental variables for the system to work as intended. By now you should at least fill the first three variables concerning the deployment. Bear in mind that both *SERVICES_PREFIX* and *DNS_SUFIX* must start with a dot and end without it.
-```
+```yaml
 # GENERAL (Mandatory for deployment)
 SERVICES_PREFIX=                    # Ex: .bluejay
 DNS_SUFFIX=                         # Ex: .bluejay
@@ -72,12 +72,12 @@ COMPOSE_HTTP_TIMEOUT=200                    # No need to modify
 ```
 
 **4.** Deploy the system with the following command:
-```
+```bash
 ./utils/deploy.sh
 ```
 
 **5.** (Optional) When the deployment is done, create the SSL certificates for your deployment using [Lets Encript](https://letsencrypt.org/):
-```
+```bash
 ./utils/init-letsencrypt.sh
 ```
 
@@ -85,19 +85,19 @@ Governify ecosystem with bluejay services should have been deployed in your mach
 
 ## Advanced Infrastructure Deploy
 To start you should download the infrastructure:
-```
+```bash
 curl https://github.com/governify/bluejay-infrastructure/archive/2.2.0.zip -LO
 ```
 
 Unzip it:
-``` 
+``` bash
 unzip 2.2.0.zip
 cd /bluejay-infrastructure-2.2.0
 ``` 
 
 Now, open a terminal in the root folder and execute setupAdvanced.sh script:
 
-```
+```bash
 ./setupAdvanced.sh 
 ```
 ![Setup Wizard](/img/deployment/setup_wizard_main.png)
@@ -111,7 +111,7 @@ You should now follow the steps in order to accomplish the system deployment. Th
 **1. (Optional) Docker and Docker Compose installation (yum/AWS):** When used it installs all the needed tools for the system to function  using yum package manager.
 
 **2. Environment variables setup:** It opens with `nano` the file .env to enter the different environment variables the system needs to function properly. 
-```
+```yaml
 # GENERAL (Mandatory for deployment)
 SERVICES_PREFIX=                    # Ex: .bluejay
 DNS_SUFFIX=                         # Ex: .domain.com
