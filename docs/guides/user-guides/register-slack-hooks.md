@@ -46,7 +46,7 @@ This panel manages the reports of all groups to the admin slack channel.
 
 ## Students Notifications Panel
 ---
-This panel manages individual reports sent to each team. It is important to note that all teams should have their Slack webhook configured in their [info.yml](/TODO).
+This panel manages individual reports sent to each team. It is important to note that all teams should have their Slack webhook configured in their [info.yml](/guides/user-guides/register-new-teams).
 The top panel toggles all notifications for each group. However, you can toggle each group independently (right switch button).
 
 <img alt="students panel" src="/img/guides/slack/slack-student-panel.png" width="80%"/>
