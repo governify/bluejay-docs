@@ -77,34 +77,48 @@ Within the `assets/private/scope-manager` directory, you will discover a file na
 {
     "development": [
         {
-            "classId": "test",
+            "classId": "showcase",
             "identities": [],
             "credentials": [],
             "projects": [
                 {
-                    "name": "Bluejay test",
-                    "projectId": "project01",
-                    "owner": "governify",
+                    "name": "bluejay-showcase",
+                    "owner": "L2",
+                    "teamId": "08",
+                    "projectId": "showcase-GH-governify_bluejay-showcase",
+                    "notifications": {
+                        "email": ""
+                    },
+                    "credentials": [],
                     "identities": [
                         {
                             "source": "github",
-                            "repository": "bluejay-infrastructure",
+                            "repository": "bluejay-showcase",
                             "repoOwner": "governify"
                         }
                     ],
                     "members": [
                         {
-                            "memberId": 1,
+                            "memberId": "Javi_Fdez",
                             "identities": [
                                 {
                                     "source": "github",
-                                    "username": "<YourGHname>"
+                                    "username": "JaviFdez7"
+                                }
+                            ],
+                            "credentials": []
+                        },
+                        {
+                            "memberId": "Governify_Auditor",
+                            "identities": [
+                                {
+                                    "source": "github",
+                                    "username": "governifyauditor"
                                 }
                             ],
                             "credentials": []
                         }
-                    ],
-                    "credentials": []
+                    ]
                 }
             ]
         }
@@ -113,6 +127,9 @@ Within the `assets/private/scope-manager` directory, you will discover a file na
 ```
 If you modify this file to add more projects or make any change, you will have to restart the `render` and `scope-manager` containers.
 
+
+The scope directory should look like this:
+![scopes.json](../../static/img/deployment/docker-quickstart/scopes.png)
 ## 4. Deploy with Docker Compose
 Now we can deploy the system with the following command:
 ```
@@ -142,3 +159,5 @@ docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env down 
 
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d # deploy
 ``` 
+
+## 5. Posting a tpa for the project and generating the first points
