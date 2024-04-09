@@ -160,4 +160,5 @@ docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env down 
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d # deploy
 ``` 
 
-## 5. Posting a tpa for the project and generating the first points
+## 5. Posting a TPA for the project and generating the first points
+You can find more information about that in [Local TPA Creation Quickstart](../tpa-creation)
