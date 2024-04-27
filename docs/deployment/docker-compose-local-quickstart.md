@@ -12,10 +12,14 @@ hide_table_of_contents: false
 This guide deploys bluejay with the docker ecosystem in a local/development environment. For a more advanced deployment please refer to [Docker Compose](./docker-compose.md).
 
 ## Prerequisites
-- Windows OS with the following installed packages:
+- Windows OS, Linux or macOS with the following installed packages:
    - docker
    - docker-compose (version 1.27 or greater)
-- Ports 80, 443 open on the server. 
+- Ports 80, 443 open on the server.
+
+:::info
+Most of Bluejay's Docker images are built using the linux/amd64 platform. If using a computer with an ARM processor (such as a Mac with Apple Silicon), see more details in [section 4](#4-deploy-with-docker-compose) below.
+:::
 
 ## 1. Clone Repo
 Clone latest release of [Bluejay Infrastructure repository](https://github.com/governify/bluejay-infrastructure):
@@ -135,6 +139,10 @@ Now we can deploy the system with the following command:
 ```
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d 
 ```
+
+:::info
+If using a computer with an ARM processor, modify the `version` in the docker-compose-local.yaml file to `2.4` and add `platform: linux/amd64` to each service that fails to launch. Alternatively, set the environment variable `DOCKER_DEFAULT_PLATFORM` to `linux/amd64`.
+:::
 
 Navigate to localhost:5100 to access the main page of Bluejay. A prompt like the following will pop up in your browser, where have to input the `USER_RENDER` and `PASS_RENDER` values specified in the `.env` file:
 ![Login](../../static/img/deployment/docker-quickstart/login-render.png)
