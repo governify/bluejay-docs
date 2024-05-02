@@ -1,11 +1,11 @@
 ---
-title: Docker Compose
-description: Docker Compose
+title: Docker Compose (production)
+description: Docker Compose (production)
 sidebar_position: 1 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
 ---
 
-# Docker Compose Deployment
+# Docker Compose (production) Deployment
 
 ---
 

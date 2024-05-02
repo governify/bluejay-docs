@@ -1,15 +1,15 @@
 ---
-title: Docker Compose Local Quickstart
-description: Docker Compose deployed locally
+title: Docker Compose (development) Quickstart
+description: Docker Compose (development) deployed locally
 sidebar_position: 2 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
 ---
 
-# Docker Compose Deployment - Quickstart version
+# Docker Compose (development) Deployment - Quickstart version
 
 ---
 
-This guide deploys bluejay with the docker ecosystem in a local/development environment. For a more advanced deployment please refer to [Docker Compose](./docker-compose.md).
+This guide deploys bluejay with the docker ecosystem in a local/development environment. During this quickstart the system is deployed with docker, a class is created, a TPA is created for that class and a calculation is carried out to display the first points on the graphs.
 
 ## Prerequisites
 - Windows OS, Linux or macOS with the following installed packages:
@@ -72,11 +72,11 @@ Generating a Github token is an essential step. With this key Blujay is able to 
 - Navigate to your github account and then go to  `Settings>Developer Settings` (at the end of the menu).
 - Go to `Personal access tokens > Tokens (classic)`
 - Click on `Generate new token > Generate new token (classic)` 
-- The scopes you select are up to you, but you need at least repository access.
+- The scopes you select are up to you, but you need at least **repository**, **project** and **user** access.
 - Click on `Generate token` and make sure to copy the given key and paste it into `KEY_GITHUB` in the `.env` file.
 
 ## 3. Create scopes.json
-Within the `assets/private/scope-manager` directory, you will discover a file named `scopes.json.example`. This file serves as a blueprint, guiding us in the creation of our custom `scopes.json`, which will be located within the same directory as the example. You can copy the following contents into your scopes file as a test.
+Within the `assets/private/scope-manager` directory, you will discover a file named `scopes.json.example`. This file serves as a blueprint, guiding us in the creation of our custom `scopes.json`, which will be located within the same directory as the example. You can copy the following contents into your scopes file as a test, although the `scopes.json.example` file already includes this content.
 ```json
 {
     "development": [
@@ -113,11 +113,11 @@ Within the `assets/private/scope-manager` directory, you will discover a file na
                             "credentials": []
                         },
                         {
-                            "memberId": "Governify_Auditor",
+                            "memberId": "Pablo_Fdez",
                             "identities": [
                                 {
                                     "source": "github",
-                                    "username": "governifyauditor"
+                                    "username": "pafmon"
                                 }
                             ],
                             "credentials": []
@@ -129,8 +129,6 @@ Within the `assets/private/scope-manager` directory, you will discover a file na
     ]
 }
 ```
-If you modify this file to add more projects or make any change, you will have to restart the `render` and `scope-manager` containers.
-
 
 The scope directory should look like this:
 ![scopes.json](../../static/img/deployment/docker-quickstart/scopes.png)
@@ -150,6 +148,9 @@ Navigate to localhost:5100 to access the main page of Bluejay. A prompt like the
 
 Governify ecosystem with bluejay services should have been deployed in your machine.
 
+### 4. Useful commands and information
+If you modify the scopes.json to add more projects or make any change after deploying the ecosystem, you will have to restart the `scope-manager` container.
+
 To stop the containers use:
 ```bash
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env stop
@@ -168,5 +169,34 @@ docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env down 
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d # deploy
 ``` 
 
-## 5. Posting a TPA for the project and generating the first points
-You can find more information about that in [Local TPA Creation Quickstart](../tpa-creation)
+## 5. Create a new TPA for the project
+The TPA you are going to create provides information about the number of issues in progress that the members of the repository have in the project.
+
+In the user interface, click on the project's Create TPA button located under Other Projects
+![Create-TPA](../../static/img/deployment/docker-quickstart/create-tpa.png)
+
+You have now created the TPA for the test project. This is what you will see in the user interface. It is time to compute this TPA to see how the work team is performing.
+
+![Created-TPA](../../static/img/deployment/docker-quickstart/created-tpa.png)
+
+## 6. Compute the TPA
+From the user interface, we click on the TPA button in the project and access the TPA details. In this new menu we click on Calculate Metrics. We enter the time and date you are currently on (take into account the time zone and enter exactly 1 hour (59 minutes and 59 seconds) for this test) and click on compute.
+
+![Calculate-metrics](../../static/img/deployment/docker-quickstart/calculate-metrics.png)
+
+ Now you must wait about 10 seconds or access the reporter logs, which will notify you when the elements have been inserted into the graphs.
+
+Then access the dashboard with the following credentials:
+- User: **governify-admin**
+- Password: **governify-project** 
+
+And see the information that has been generated according to the data from the github repository
+
+![grafana-points](../../static/img/deployment/docker-quickstart/grafana-points.png)
+
+## 6. Next Steps
+For more information on how a TPA works, visit our documentation on [TPA configurations](../customization/agreement-modeling/team-practices-agreements).
+
+If you want to know the complete architecture of the ecosystem, visit the [governify architecture documentation](https://docs.governify.io/architecture/intro).
+
+If you find any errors or want to propose any improvements to the documentation, follow this [contribution guide](https://docs.governify.io/development/contributing/contributing-to-docs)
