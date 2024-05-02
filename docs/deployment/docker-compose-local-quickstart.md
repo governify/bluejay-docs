@@ -75,7 +75,22 @@ Generating a Github token is an essential step. With this key Blujay is able to 
 - The scopes you select are up to you, but you need at least **repository**, **project** and **user** access.
 - Click on `Generate token` and make sure to copy the given key and paste it into `KEY_GITHUB` in the `.env` file.
 
-## 3. Create scopes.json
+## 3. Deploy with Docker Compose
+Now we can deploy the system with the following command:
+```
+docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d 
+```
+
+:::info
+If using a computer with an ARM processor, modify the `version` in the docker-compose-local.yaml file to `2.4` and add `platform: linux/amd64` to each service that fails to launch. Alternatively, set the environment variable `DOCKER_DEFAULT_PLATFORM` to `linux/amd64`.
+:::
+
+Navigate to localhost:5100 to access the main page of Bluejay. A prompt like the following will pop up in your browser, where have to input the `USER_RENDER` and `PASS_RENDER` values specified in the `.env` file:
+![Login](../../static/img/deployment/docker-quickstart/login-render.png)
+
+Governify ecosystem with bluejay services should have been deployed in your machine.
+
+## 4. Create scopes.json
 Within the `assets/private/scope-manager` directory, you will discover a file named `scopes.json.example`. This file serves as a blueprint, guiding us in the creation of our custom `scopes.json`, which will be located within the same directory as the example. You can copy the following contents into your scopes file as a test, although the `scopes.json.example` file already includes this content.
 ```json
 {
@@ -132,23 +147,11 @@ Within the `assets/private/scope-manager` directory, you will discover a file na
 
 The scope directory should look like this:
 ![scopes.json](../../static/img/deployment/docker-quickstart/scopes.png)
-## 4. Deploy with Docker Compose
-Now we can deploy the system with the following command:
-```
-docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d 
-```
 
-:::info
-If using a computer with an ARM processor, modify the `version` in the docker-compose-local.yaml file to `2.4` and add `platform: linux/amd64` to each service that fails to launch. Alternatively, set the environment variable `DOCKER_DEFAULT_PLATFORM` to `linux/amd64`.
-:::
-
-Navigate to localhost:5100 to access the main page of Bluejay. A prompt like the following will pop up in your browser, where have to input the `USER_RENDER` and `PASS_RENDER` values specified in the `.env` file:
-![Login](../../static/img/deployment/docker-quickstart/login-render.png)
+Now you have to restart the `scope-manager` container in docker. Once restarted you will be able to view the showcase project in the user interface
 ![BJ](../../static/img/deployment/docker-quickstart/render-bluejay.png)
 
-Governify ecosystem with bluejay services should have been deployed in your machine.
-
-### 4. Useful commands and information
+### 5. Useful commands and information
 If you modify the scopes.json to add more projects or make any change after deploying the ecosystem, you will have to restart the `scope-manager` container.
 
 To stop the containers use:
@@ -169,7 +172,7 @@ docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env down 
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d # deploy
 ``` 
 
-## 5. Create a new TPA for the project
+## 6. Create a new TPA for the project
 The TPA you are going to create provides information about the number of issues in progress that the members of the repository have in the project.
 
 In the user interface, click on the project's Create TPA button located under Other Projects
@@ -179,7 +182,7 @@ You have now created the TPA for the test project. This is what you will see in 
 
 ![Created-TPA](../../static/img/deployment/docker-quickstart/created-tpa.png)
 
-## 6. Compute the TPA
+## 7. Compute the TPA
 From the user interface, we click on the TPA button in the project and access the TPA details. In this new menu we click on Calculate Metrics. We enter the time and date you are currently on (take into account the time zone and enter exactly 1 hour (59 minutes and 59 seconds) for this test) and click on compute.
 
 ![Calculate-metrics](../../static/img/deployment/docker-quickstart/calculate-metrics.png)
@@ -194,7 +197,7 @@ And see the information that has been generated according to the data from the g
 
 ![grafana-points](../../static/img/deployment/docker-quickstart/grafana-points.png)
 
-## 6. Next Steps
+## 8. Next Steps
 For more information on how a TPA works, visit our documentation on [TPA configurations](../customization/agreement-modeling/team-practices-agreements).
 
 If you want to know the complete architecture of the ecosystem, visit the [governify architecture documentation](https://docs.governify.io/architecture/intro).
