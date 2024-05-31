@@ -8,18 +8,20 @@ hide_table_of_contents: false
 # Optimize Calculation Period
 
 ---
-Bluejay has an automatic calculation system for its TPAs. However fetching data and calculating metrics of a a course consisting of numerous teams can lead to performance issues.
+Bluejay has an automatic calculation system for its TPAs. However, fetching data and calculating metrics for a course consisting of numerous teams can lead to performance issues.
 
-The **"Optimize Calculation Period"** aims to resolve the challenge of multiple automatic calculations triggering simultaneously in a course. It achieves this by **evenly distributing** the execution times for these calculations across a given period of time.
 
-This script is one of the [Custom Tasks of Extending Governify](https://docs.governify.io/development/extending-governify/custom-tasks) and it is stored within the assets-bluejay repository [(link)](https://github.com/governify/assets-bluejay/blob/main/public/director/tasks/utils/optimizeCalculationPeriod/script.js).
+The **"Optimize Calculation Period"** script aims to resolve the challenge of multiple automatic calculations triggering simultaneously within a course.
+It achieves this by **evenly distributing** the execution times for these calculations across a given period of time.
+
+This script is one of the [Custom Tasks of Extending Governify](https://docs.governify.io/development/extending-governify/custom-tasks), and it is stored within the assets-bluejay repository [(link)](https://github.com/governify/assets-bluejay/blob/main/public/director/tasks/utils/optimizeCalculationPeriod/script.js).
 
 In this document, we will discuss how to load, configure, and run the script from the user interface. If you want to see the inner workings of this script, we will provide an explanation of the technical details in the last section.
 
 ## Load Optimize Calculation Period
 1. Go to  ***ui.bluejay.[YourDomain]*** 
 2. Click on Admin UI
-3. Click on Task Runner tab
+3. Click on the Task Runner tab
 4. Open the dropdown and select OptimizeCalculationPeriod.
 
 
@@ -29,31 +31,42 @@ In this document, we will discuss how to load, configure, and run the script fro
 
 Let's have a look at the Configuration.json parameters:
 
-- **courseRegex**: *string*.    
-> This field specifies the name of the desired course.
-- **maxMinutesDelay**: *int*. 
->This value represents the time in minutes between the default calculation date of the course and the furthest calculation. A positive value delays some of the calculations, while a negative value is allowed to anticipate instead of delaying the calculations.
+- **filenameMustIncludeAll**: *string array*.    
+> This field specifies the substrings that must be included in the filenames of computation tasks in the director's folder inside the Bluejay assets. This can be used to filter the tasks by courseName, year, etc. Example name of the files: `tpa-class01-GH-motero2k_Bluejay-test-TPA-23-24.json`
+- **startingTime**: *string*. 
+> The starting time in 24-hour format (HH:mm) from which the calculations should begin for the teams selected.
+- **endingTime**: *string*.
+> The ending time in 24-hour format (HH:mm) by which all calculations should be completed.
 - **batchSize**: *int*.
->This field indicates the number of teams that can be activated at the same hour.
+> This field indicates the number of teams that can be activated at the same time.
 
 
-**Example:** **5 teams** in a course named `class01` configured to launch automatic calculations at `15h00`  and these parameters in the config:
-```txt
+
+
+**Example:** **5 teams** in a course `class01` with activated automatic calculations at any time. The script with the following configuration will distribute evenly the calculations between `14:00` and `16:00` in batches of `2` teams each.
+```json
 {
-    "courseRegex": "class01",
-    "maxMinutesDelay": 60,
+    "filenameMustIncludeAll": ["tpa-","class01"],
+    "startingTime": "14:00",
+    "endingTime": "16:00",
     "batchSize": 2
 }
+```
+```txt
 -----------------------------------------
 expected result:
-5/2 = 2 + 1, total 3. 
------------------------------------------ 
-btch1 15h -> Team1 and Team2
-btch2 15h30 -> Team3 and Team4
-btch3 16h00 -> Team5 
+5 teams / 2 teams per batch = 2 batches of 2 + 1 batch of 1, total 3 batches.
+
+-----------------------------------------
+batch1 14:00 -> Team1 and Team2
+batch2 15:00 -> Team3 and Team4
+batch3 16:00 -> Team5 
 ```
+
+
 ## Run the script
-**Click run** and you will see the results on the log of **Result.json:** 
+**Click run** and you will see the results in the log of **Result.json:** 
+
 
 ```json
 {
@@ -69,7 +82,7 @@ btch3 16h00 -> Team5
       "tpa-class1-GH-motero2k_Test-Repo-for-Bluejay-copy3",
       "tpa-class1-GH-motero2k_test2-for-bluejay"
     ],
-    "5 files in groups of 2 = 3 ,minutesBetweenRuns: 30",
+    "5 files in groups of 2 = 3 ,minutesBetweenRuns: 60",
     #changed configuration files are shown here
     ,
     "script end"
@@ -79,7 +92,9 @@ btch3 16h00 -> Team5
 
 :::info bear in mind
 - You can check the new dates in the **Task Management** tab
-- If you want to execute this script again, you must **turn on and of all automatic calculations in the course** (this resets  launch times to default).
+- If you want to execute this script again, you must **turn off and on all automatic calculations in the course** (this resets the launch times to default).
+- Bluejay use `tpa-` prefix for the automatic agreements calculations, so it is recommended to use this prefix in the filenameMustIncludeAll field.
+
 :::
 ---
 
@@ -106,86 +121,74 @@ module.exports.main = async (config) => {
   try {
     //SCRIPT BEGIN
 ```
-Here we make sure that the **batchSize and maxMinutesDelay are integers and contained in a reasonable range.** maxMinutesDelay can be negative as we stated in the configuration section.
+**Config variables**: Extracting and validating the configuration variables.
 ```js showLineNumbers
-    if(typeof config.batchSize != "number" ||
-         typeof config.maxMinutesDelay != "number") 
-    throw new Error("BatchSize and maxMinutesDelay must be numbers")
+    const batchSize = config.batchSize
+    const startingTimeZstring = config.startingTime
+    const endingTimeZstring = config.endingTime
+    const filenameMustIncludeAll = config.filenameMustIncludeAll;
 
-    if(config.batchSize<1 || 20<  config.batchSize) 
-        throw new Error("BatchSize out of bounds [0,20]");
-    config.batchSize = parseInt(config.batchSize);
-    config.maxMinutesDelay = parseInt(config.maxMinutesDelay);
+    if(!Array.isArray(filenameMustIncludeAll) || filenameMustIncludeAll.length < 1) throw new Error("filenameMustInclude must be a string array")
+    if(typeof startingTimeZstring != "string" || typeof endingTimeZstring != "string") throw new Error("startingTime and endingTime must be strings")
+
+    if(!moment(startingTimeZstring, 'HH:mm', true).isValid()) throw new Error("startingTime is not a valid time in 24h format (HH:mm)")
+    if(!moment(endingTimeZstring, 'HH:mm', true).isValid()) throw new Error("endingTime is not a valid time in 24h format (HH:mm)")
+
+    if(typeof batchSize != "number" ) throw new Error("BatchSize must be number")
+    if(batchSize<1 || 20<  batchSize) throw new Error("BatchSize out of bounds [0,20]")
 ```
-**All scripts are executed in `/director`.** `/director/tasks` is the folder where automatic calculations configuration files are stored.
+**Parsing time variables and searching for JSON files.**
+
+The json files (active calculations) are searched in the tasks folder of the bluejay assets. The files are filtered by the filenameMustIncludeAll strings.
+
 ```js showLineNumbers
+    const startingTime = moment(startingTimeZstring, 'HH:mm');
+    const endingTime = moment(endingTimeZstring, 'HH:mm');
+
     const currentDirectory = path.join(process.cwd(), 'tasks');
     log(`Current directory: ${currentDirectory}`);
-    const courseName = config.courseRegex;
-    log(`Searching for JSON files containing: ${courseName}`);
+    log(`Searching for JSON files containing: ${filenameMustIncludeAll}`);
 
-    const jsonFiles = fs.readdirSync(currentDirectory)
-    .filter(file => file.includes('tpa-'+courseName) 
-        && file.endsWith('.json')) // Filter files by course and .json extension
-    .map(file => path.parse(file).name); // Get file names without the extension
-```
-If no automatic calculation files are found or if the batch number is too high, the script will throw an error; otherwise, **it will log the name of the files.**
-```js showLineNumbers
+    const jsonFilesNames = fs.readdirSync(currentDirectory)
+    .filter(fileName => fileName.endsWith('.json')) 
+    .filter(fileName => filenameMustIncludeAll.every(mustHaveString => fileName.includes(mustHaveString)))
+    .map(fileName => path.parse(fileName).name);
 
-    if(jsonFiles.length < 1){
-      throwError("Automatic computations not found in course "+ courseName)
+    if(jsonFilesNames.length < 1){
+      throwError("Automatic computations not found in course containing "+ filenameMustIncludeAll)
     }
     log("Active computations: ")
-    log(jsonFiles)
-
-    if(config.batchSize > jsonFiles.length) 
-        throwError(`batch number too big (${config.batchSize}) 
-            for ${jsonFiles.length} groups`);
+    log(jsonFilesNames)
 ```
-The script now gets the **number of batches** (a batch is a group of calculations executed at once) and the **time between executions.**
+**Determining the number of batches and the time interval between them.**
 ```js showLineNumbers
-    //number of divisions of the time given
-    const numberOfBatchs =  Math.ceil(jsonFiles.length / config.batchSize) 
-    if(numberOfBatchs <=1 ) {log("All done, nothing changed");return result}
-
-    // takes out the intial date (not modified)
-    // 60 min / (4-1) = 20 => i*20 => [00:00, 00:20, 00:40, 00:60]
-    const numberOfBatchsNormalized = numberOfBatchs-1 
-
-    const minutesBetweenRuns = config.maxMinutesDelay / numberOfBatchsNormalized; 
-    log(`${jsonFiles.length} files in groups of ${config.batchSize} 
-        = ${numberOfBatchs} ,minutesBetweenRuns: ${minutesBetweenRuns}`)
+    if(batchSize > jsonFilesNames.length) throwError(`batch number too big (${batchSize}) for ${jsonFilesNames.length} groups`)
+    const numberOfBatchs =  Math.ceil(jsonFilesNames.length / batchSize)
+    if(numberOfBatchs <1 ) {log("All done, nothing changed");return result}
+    const numberOfBatchsNormalized = numberOfBatchs-1
+    const timeBetweenRuns = (endingTime.diff(startingTime) / numberOfBatchsNormalized);
+    log(`${jsonFilesNames.length} files in groups of ${batchSize} = ${numberOfBatchs} ,minutesBetweenRuns: ${timeBetweenRuns/60000} minutes`)
 ```
-**Stores the dates in variables.**
+**Adjusting the NEW initial and end dates for each computation task.**
 ```js showLineNumbers
-    jsonFiles.forEach((file, index) => {
-        const fullFilePath = path.join(currentDirectory, file+".json");
+    jsonFilesNames.forEach((file, index) => {
+      const fullFilePath = path.join(currentDirectory, file+".json");
+
       const content = fs.readFileSync(fullFilePath, 'utf8') 
 
       const data = JSON.parse(content);
 
       const initDate = moment.utc(data.init, 'YYYY-MM-DDTHH:mm:ss.SSSZ');
       const endDate = moment.utc(data.end, 'YYYY-MM-DDTHH:mm:ss.SSSZ');
-```
-The script now **modifies the original dates** (course default) to spread the executions **using minutesBetweenRuns**
-```js showLineNumbers
-      //why the %(mod) operation? 
-      //Lets say you have 5 computations (index)(C) to do in 2 defined Times(T). 
-      //You assign computations C0->T0 C1->T1 
-      // !!start again in Time 0!! 
-      //C2-T0, C3->T1, C4->T0... the index can have big values, 
-      //mod operation resets them to always keep them within the batches range
-      
-      const adjustedInit = initDate.add(
-            (index%numberOfBatchs) * minutesBetweenRuns *60*1000, 'ms')
-            .format('YYYY-MM-DDTHH:mm:ss.SSSZ');
-            //example: i*20 => [00:00, 00:20, 00:40, 00:60]
-      const adjustedEnd = endDate.add(
-        (index%numberOfBatchs) * minutesBetweenRuns *60*1000, 'ms')
-        .format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
-      data.init = adjustedInit;
-      data.end = adjustedEnd;
+      const adjustedInit = initDate
+      .set({hour: startingTime.hours(), minute: startingTime.minutes(), second:0, milisecond:0}) 
+      .add((index%numberOfBatchs) * timeBetweenRuns , 'ms');
+      const adjustedEnd = endDate
+      .set({hour: adjustedInit.hours(), minute: adjustedInit.minutes()})
+      
+      data.init = adjustedInit.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
+      data.end = adjustedEnd.format('YYYY-MM-DDTHH:mm:ss.SSSZ');
 
       const updatedContent = JSON.stringify(data, null, 2);
       
@@ -195,15 +198,12 @@ The script now **modifies the original dates** (course default) to spread the ex
       
     });
 
-```
-This is the end of the script. These lines are also from the **script.js template** mentioned above.
-```js showLineNumbers
     log("script end")
     return result;
     //SCRIPT END
 
   } catch (error) {
-    return { error: error.stack.split('\n').slice(0,3), log: result.log };
+    return { error: error.stack.split('\n').slice(0,10), log: result.log };
   }
 };
 ```
