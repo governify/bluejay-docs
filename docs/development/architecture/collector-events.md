@@ -9,6 +9,12 @@ sidebar_position: 1
 
 ---
 
+## Introduction
+
+These conclusions are the result of two performance analysis that have been carried out demonstrating what is set out below.
+- [Analysis with TPA of 5 guarantees](https://docs.google.com/spreadsheets/d/1Upg3FPM2alc0Ys-61MBUJiLufiG5ALuVAVllVsF58PY/edit?usp=sharing)
+- [Analysis with TPA of 10 guarantees](https://docs.google.com/spreadsheets/d/1Xc7gb1O7iqSB86NvGlywV6z7nmkCe4msFGU3bldWqGo/edit?usp=sharing)Ç
+
 ### Calculation time of a repository with High activity vs Low activity
 
 Calculations for TPAs whose repositories contain more information (issues, comments, pull requests, etc.) take longer to compute compared to those with less information. However, the difference is small. Nevertheless, it should be studied on a case-by-case basis depending on the project repository and the TPA used to obtain a detailed understanding of the difference to take it into account.
