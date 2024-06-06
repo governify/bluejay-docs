@@ -13,7 +13,7 @@ sidebar_position: 1
 
 These conclusions are the result of two performance analysis that have been carried out demonstrating what is set out below.
 - [Analysis with TPA of 5 guarantees](https://docs.google.com/spreadsheets/d/1Upg3FPM2alc0Ys-61MBUJiLufiG5ALuVAVllVsF58PY/edit?usp=sharing)
-- [Analysis with TPA of 10 guarantees](https://docs.google.com/spreadsheets/d/1Xc7gb1O7iqSB86NvGlywV6z7nmkCe4msFGU3bldWqGo/edit?usp=sharing)Ç
+- [Analysis with TPA of 10 guarantees](https://docs.google.com/spreadsheets/d/1Xc7gb1O7iqSB86NvGlywV6z7nmkCe4msFGU3bldWqGo/edit?usp=sharing)
 
 ### Calculation time of a repository with High activity vs Low activity
 
