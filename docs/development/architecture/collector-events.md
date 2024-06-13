@@ -17,7 +17,7 @@ These conclusions are the result of two performance analysis that have been carr
 
 ### Calculation time of a repository with High activity vs Low activity
 
-Calculations for TPAs whose repositories contain more information (issues, comments, pull requests, etc.) take longer to compute compared to those with less information. However, the difference is small. Nevertheless, it should be studied on a case-by-case basis depending on the project repository and the TPA used to obtain a detailed understanding of the difference to take it into account.
+Calculations for TPAs whose repositories contain more information (issues, comments, pull requests, etc.) take longer to compute compared to those with less information. However, the difference is small. Nevertheless, it should be studied on a case-by-case basis depending on the project repository and the TPA used to obtain a detailed understanding of the difference to take it into account. You can find evidence in this sheet showing the increase in collector calculation time over time for various projects during the course of ISPP-2024. [link](https://docs.google.com/spreadsheets/d/15HNMi1VU1ZUy0s6t1aNuTapS2eRQCLG3Z0iVGgdGEsg/edit?usp=sharing)
 
 ## Performance
 
