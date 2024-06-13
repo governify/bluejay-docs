@@ -1,11 +1,11 @@
 ---
-title: Collector-events
-description: Collector-events
+title: Collector-events performance
+description: Collector-events performance
 hide_table_of_contents: false
 sidebar_position: 1
 ---
 
-# Collector-events
+# Collector-events performance
 
 ---
 

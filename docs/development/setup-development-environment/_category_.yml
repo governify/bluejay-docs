@@ -1,0 +1,7 @@
+position: 2 # Sets this category to the second position in the sidebar
+label: 'Setup Development Environment'
+collapsible: true
+collapsed: true
+link:
+  type: doc
+  id: intro 
