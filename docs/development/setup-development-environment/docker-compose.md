@@ -202,7 +202,7 @@ And see the information that has been generated according to the data from the g
 ![grafana-points](../../../static/img/deployment/docker-compose-local/grafana-points.png)
 
 ## 8. Next Steps
-For more information on how a TPA works, visit our documentation on [TPA configurations](../customization/agreement-modeling/team-practices-agreements).
+For more information on how a TPA works, visit our documentation on [TPA configurations](/customization/agreement-modeling/team-practices-agreements).
 
 If you want to know the complete architecture of the ecosystem, visit the [governify architecture documentation](https://docs.governify.io/architecture/intro).
 
