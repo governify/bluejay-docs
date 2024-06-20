@@ -1,11 +1,11 @@
 ---
-title: Docker Compose (development)
-description: Docker Compose (development) deployed locally
-sidebar_position: 2 # Sets this doc to the first position in the sidebar
+title: Docker Compose
+description: Docker Compose deployed locally
+sidebar_position: 1 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
 ---
 
-# Docker Compose (development) Deployment
+# Docker Compose Deployment
 
 ---
 
@@ -16,6 +16,10 @@ This guide deploys bluejay with the docker ecosystem in a local/development envi
    - docker
    - docker-compose (version 1.27 or greater)
 - Ports 80, 443 open on the server.
+- In case you are running a linux machine, you need to asociate the host.docker.internal url to 172.17.0.1 (docker's gateway)
+```ssh
+host-manager -add host.docker.internal 172.17.0.1
+```
 
 :::info
 Most of Bluejay's Docker images are built using the linux/amd64 platform. If using a computer with an ARM processor (such as a Mac with Apple Silicon), see more details in [section 4](#4-deploy-with-docker-compose) below.
@@ -86,7 +90,7 @@ If using a computer with an ARM processor, modify the `version` in the docker-co
 :::
 
 Navigate to localhost:5100 to access the main page of Bluejay. A prompt like the following will pop up in your browser, where have to input the `USER_RENDER` and `PASS_RENDER` values specified in the `.env` file:
-![Login](../../static/img/deployment/docker-compose-local/login-render.png)
+![Login](../../../static/img/deployment/docker-compose-local/login-render.png)
 
 Governify ecosystem with bluejay services should have been deployed in your machine.
 
@@ -146,10 +150,10 @@ Within the `assets/private/scope-manager` directory, you will discover a file na
 ```
 
 The scope directory should look like this:
-![scopes.json](../../static/img/deployment/docker-compose-local/scopes.png)
+![scopes.json](../../../static/img/deployment/docker-compose-local/scopes.png)
 
 Now you have to restart the `scope-manager` container in docker. Once restarted you will be able to view the showcase project in the user interface
-![BJ](../../static/img/deployment/docker-compose-local/render-bluejay.png)
+![BJ](../../../static/img/deployment/docker-compose-local/render-bluejay.png)
 
 ### 5. Useful commands and information
 If you modify the scopes.json to add more projects or make any change after deploying the ecosystem, you will have to restart the `scope-manager` container.
@@ -176,16 +180,16 @@ docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d
 The TPA you are going to create provides information about the number of issues in progress that the members of the repository have in the project. You can find the complete TPA in the [zoo repository](https://github.com/governify/zoo/blob/main/bluejay/tpa/showcase/v1.1/tpa-showcase-v1.1.json).
 
 In the user interface, click on the project's Create TPA button located under Other Projects
-![Create-TPA](../../static/img/deployment/docker-compose-local/create-tpa.png)
+![Create-TPA](../../../static/img/deployment/docker-compose-local/create-tpa.png)
 
 You have now created the TPA for the test project. This is what you will see in the user interface. It is time to compute this TPA to see how the work team is performing.
 
-![Created-TPA](../../static/img/deployment/docker-compose-local/created-tpa.png)
+![Created-TPA](../../../static/img/deployment/docker-compose-local/created-tpa.png)
 
 ## 7. Compute the TPA
 From the user interface, we click on the TPA button in the project and access the TPA details. In this new menu we click on Calculate Metrics. We enter the time and date you are currently on (take into account the time zone and enter exactly 1 hour (59 minutes and 59 seconds) for this test) and click on compute.
 
-![Calculate-metrics](../../static/img/deployment/docker-compose-local/calculate-metrics.png)
+![Calculate-metrics](../../../static/img/deployment/docker-compose-local/calculate-metrics.png)
 
  Now you must wait about 10 seconds or access the reporter logs, which will notify you when the elements have been inserted into the graphs.
 
@@ -195,7 +199,7 @@ Then access the dashboard with the following credentials:
 
 And see the information that has been generated according to the data from the github repository
 
-![grafana-points](../../static/img/deployment/docker-compose-local/grafana-points.png)
+![grafana-points](../../../static/img/deployment/docker-compose-local/grafana-points.png)
 
 ## 8. Next Steps
 For more information on how a TPA works, visit our documentation on [TPA configurations](../customization/agreement-modeling/team-practices-agreements).

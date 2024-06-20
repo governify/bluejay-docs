@@ -5,7 +5,7 @@ sidebar_position: 3 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
 ---
 
-# Kubernetes Deployment
+# Kubernetes Deployment Governify-Falcon
 
 ---
 
@@ -59,3 +59,52 @@ $    helm install -f values.yaml falcon governify/Governify-Falcon
 ```
 
 More information about the configuration options available for Governify-Falcon HELM chart can be found at our [HELM Charts repository](https://github.com/governify/helm-charts/tree/main/infrastructure/Governify-Falcon).
+
+
+
+
+
+
+
+
+
+
+## Deploying the system in a Kubernetes cluster Governify-Bluejay
+
+:::caution
+For development purposes it is more appropiate to use docker-compose due to its simplicity. Nevertheless, if the production environment is a Kubernetes cluster, it is recommended to test the system on this locally deployed cluster first.
+:::
+
+Governify provides Helm charts for deploying Bluejay services inside a Kubernetes cluster. The following steps describe how to locally deploy the infrastructure inside a development cluster (or a single-node cluster like minikube):
+
+### Steps
+
+**1.** Create Namespace
+```
+$    kubectl create namespace governify-bluejay
+```
+
+**2.** Configure kubernetes for assigning NodePorts in range (3000-9000) by adding `--service-node-port-range=3000-6000` to the kubernetes kube-apiserver config file. If using docker-desktop [check this page](https://stackoverflow.com/questions/64758012/location-of-kubernetes-config-directory-with-docker-desktop-on-windows).
+
+**3.** Create a values.yaml file with the following content
+```
+    global:
+        node_env: development
+        gov_infrastructure: <assets_call_to_infrastructure-local.yaml>
+        login_user: <username>
+        login_password: <password>
+
+    assets-manager:
+        gov_infrastructure: <local_path_to_infrastructure-local.yaml>
+        assets_repository: <repository_url> (defaults to current assets repository inside github governify organization)
+        assets_repository_branch: <branch> (default: main)
+```
+
+**4.** Install charts
+```
+$    helm repo add governify https://governify.github.io/helm-charts
+$    helm repo update
+$    helm install -f values.yaml <release_name> governify/<chart_name>
+```
+
+More information about the configuration options available for Governify-Bluejay HELM chart can be found at our [HELM Charts repository](https://github.com/governify/helm-charts/tree/main/infrastructure/Governify-Bluejay).
