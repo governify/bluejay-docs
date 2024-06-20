@@ -22,7 +22,7 @@ host-manager -add host.docker.internal 172.17.0.1
 ```
 
 :::info
-Most of Bluejay's Docker images are built using the linux/amd64 platform. If using a computer with an ARM processor (such as a Mac with Apple Silicon), see more details in [section 4](#4-deploy-with-docker-compose) below.
+Most of Bluejay's Docker images are built using the linux/amd64 platform. If using a computer with an ARM processor (such as a **Mac with Apple Silicon**), see more details in [section 3](#3-deploy-with-docker-compose) below.
 :::
 
 ## 1. Clone Repo
@@ -86,7 +86,7 @@ docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d
 ```
 
 :::info
-If using a computer with an ARM processor, modify the `version` in the docker-compose-local.yaml file to `2.4` and add `platform: linux/amd64` to each service that fails to launch. Alternatively, set the environment variable `DOCKER_DEFAULT_PLATFORM` to `linux/amd64`.
+If using a computer with an ARM processor (such as a **Mac with Apple Silicon**), modify the `version` in the docker-compose-local.yaml file to `2.4` and add `platform: linux/amd64` to each service that fails to launch. Alternatively, set the environment variable `DOCKER_DEFAULT_PLATFORM` to `linux/amd64`.
 :::
 
 Navigate to localhost:5100 to access the main page of Bluejay. A prompt like the following will pop up in your browser, where have to input the `USER_RENDER` and `PASS_RENDER` values specified in the `.env` file:
