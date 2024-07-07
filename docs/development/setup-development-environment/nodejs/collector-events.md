@@ -39,5 +39,10 @@ node index
 
 It will start in the same port as the container was and will be properly connected to the entire infrastructure.
 
+## More information about Collector-Events
+Visit the [governify documentation](https://docs.governify.io/development/services/collectors/collector-events) to learn more about how the `collector-events` works.
+
+Visit the [`collector-events` repository documentation](https://github.com/governify/collector-events?tab=readme-ov-file#governify-events-collector) to learn more about how the `collector-events` works.
+
 
 
