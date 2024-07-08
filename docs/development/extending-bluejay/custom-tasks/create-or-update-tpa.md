@@ -1,6 +1,6 @@
 ---
-title: Create or Update a Class TPA 
-description: Create or Update a Class TPA 
+title: Create or Update TPA 
+description: Create or Update TPA 
 sidebar_position: 4 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
 ---
