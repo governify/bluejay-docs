@@ -22,7 +22,7 @@ In this document, we will discuss how to load, configure, and run the script fro
 1. Go to  ***ui.bluejay.[YourDomain]*** 
 2. Click on Admin UI
 3. Click on the Task Runner tab
-4. Open the dropdown and select OptimizeCalculationPeriod.
+4. Open the dropdown and select **optimizeCalculationPeriod.**
 
 
 ![load optimize](/img/development/custom-tasks/optimize/load-optimize.png)
@@ -100,7 +100,7 @@ batch3 16:00 -> Team5
 
 ## Technical details
 
-This section explains line by line the OptimizeCalculationPeriod [script.js](https://github.com/governify/assets-bluejay/blob/main/public/director/tasks/utils/optimizeCalculationPeriod/script.js).
+This section explains line by line the **optimizeCalculationPeriod** [script.js](https://github.com/governify/assets-bluejay/blob/main/public/director/tasks/utils/optimizeCalculationPeriod/script.js).
 
 **Imports:** fs for file writing, path for joining strings as paths and moment to modify the dates.
 ```js showLineNumbers
