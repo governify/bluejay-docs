@@ -31,7 +31,7 @@ This guide deploys bluejay with the docker ecosystem and serve it by means of an
 - director.bluejay.*[YourDomain]*
 - join.bluejay.*[YourDomain]*
 
-**2.** Clone latest release of Falcon Infrastructure repository [Falcon Infrastructure](https://github.com/governify/bluejay-infrastructure):
+**2.** Clone latest release of Bluejay Infrastructure repository [Bluejay Infrastructure](https://github.com/governify/bluejay-infrastructure):
 ```
 git clone https://github.com/governify/bluejay-infrastructure.git
 ```
