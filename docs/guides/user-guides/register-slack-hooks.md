@@ -1,7 +1,7 @@
 ---
 title: Using Slack Hooks
 description: Register Slack Hooks
-sidebar_position: 3 # Sets this doc to the first position in the sidebar
+sidebar_position: 4 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
 ---
 
