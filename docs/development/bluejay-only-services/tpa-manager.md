@@ -14,6 +14,7 @@ The [TPA Manager](https://github.com/governify/TPA-Manager/tree/course-creator-c
 
 This service emerged to fulfill the need to manage the different courses and their associated projects in a visual way, while also allowing the management of TPA templates and TPAs associated in the infraestructure. 
 
+By default, it can be accessed through https://tpa-manager[BLUEJAY_SERVICES_PREFIX][BLUEJAY_DNS_SUFFIX] (e.g. https://tpa-manager.bluejay.mydomain.org) in case Bluejay is deployed in the cloud or by accessing to http://localhost:5173 if it is deployed locally.
 
 ## TPA Templates
 
@@ -37,25 +38,25 @@ Templates are stored in the database of the [Registry service](https://docs.gove
     }
 }
 ```
-
+Last but not least, the way a template should be named is `template-name-version`, with the version formatted as `vX-X-X`.
 
 
 #### Clone TPA Template
 
-A key feature is the ability to clone templates, which is particularly useful for testing or making adjustments without affecting the agreements currently in use. Cloning allows users to experiment with different configurations and make changes as needed. However, templates can only be edited if they are not being used by any course; if a template is in use, its content can only be viewed, ensuring the integrity of active agreements.
+A key feature is the ability to clone templates, which is particularly useful for testing or making adjustments without affecting the agreements currently in use. Cloning allows users to experiment with different configurations and make changes as needed. However, templates can only be edited if they are not being used by any course; if a template is in use, its content can only be displayed, ensuring the integrity of active agreements.
 
-<img src="/img/development/bluejay-only-services/tpa-manager/template-cloned.png" style={{ width: '800px' }} />
+<img alt="template cloned" src="/img/development/bluejay-only-services/tpa-manager/template-cloned.png" width="90%" />
 
 
 ## Authorization
 
 Some infrastructure microservices require an authorization key in order to operate. 
-In this case, when you setup your Bluejay infrastructure you will need to add your auth key, which changes depending if your running the TPA Manager on console -> `c025ff8502893fc6c5a87cf3febe4882` or on docker -> `bluejay-scopes-private-key`.
+In this case, when you setup your Bluejay infrastructure you will need to add your auth key, which changes depending if your running the [Scopes Manager service](https://docs.governify.io/development/services/scopes-manager) on console -> `c025ff8502893fc6c5a87cf3febe4882` or on docker -> `bluejay-scopes-private-key`.
 
 To add the authorization, simply open the settings speed dial and press 'Add Authorization'. This will save the authorization in the browser's local storage to maintain it persistently. You can also remove the authorization at any time through the speed dial.
 
 
-<img src="/img/development/bluejay-only-services/tpa-manager/add-auth.png" style={{ width: '400px' }} />
+<img alt="add auth" src="/img/development/bluejay-only-services/tpa-manager/add-auth.png" width="60%" />
 
 
 

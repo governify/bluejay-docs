@@ -1,5 +1,5 @@
 position: 2 # Sets this category to the second position in the sidebar
-label: 'Bluejay only Services'
+label: '🆕 Bluejay only Services'
 collapsible: true
 collapsed: true
 link:
