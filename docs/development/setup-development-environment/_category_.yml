@@ -1,4 +1,4 @@
-position: 1 # Sets this category to the second position in the sidebar
+position: 3 # Sets this category to the second position in the sidebar
 label: 'Setup Development Environment'
 collapsible: true
 collapsed: true

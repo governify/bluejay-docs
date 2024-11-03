@@ -1,7 +1,7 @@
 ---
 title: Register New Teams
 description: Register New Teams
-sidebar_position: 1 # Sets this doc to the first position in the sidebar
+sidebar_position: 2 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
 ---
 
@@ -12,18 +12,17 @@ hide_table_of_contents: false
 
 As explained [here](http://localhost:3000/customization/configuration#scope-file), the scope.json contains all the information about courses, teams and members available as an API (Scope Manager) for the other components to have access to it.
 
-![Successful Join](/img/guides/register-new-teams/success.png)
 
 
 ## Join
 
-For making the process of adding teams to be audited in the system more intuitive, "Join" is another microservice serving a simple frontend which is enough for this purpose. It gives the teams the ability to register by themselves into the system without the need of an administrator to do it.
+For making the process of adding teams to be audited in the system more intuitive, **Join** is another microservice serving a simple frontend which is enough for this purpose. It gives the teams the ability to register by themselves into the system without the need of an administrator to do it.
 
 By default, it can be accessed through https://join[BLUEJAY_SERVICES_PREFIX][BLUEJAY_DNS_SUFFIX] (e.g. https://join.bluejay.mydomain.org) in case Bluejay is deployed in the cloud or by accessing to http://localhost:6001 if it is deployed locally.
 
 **Bear in mind** that when registering a team to a course, the system will look for:
 
-- A **TPA template** called the same as the course in the assets folder `/public/renders/tpa` and use it to generate the TPA for the team. In case there this template does not exist, it will use template.yaml as TPA template. For more information about the TPA refer to the Agreement Modeling section.
+- A **TPA template** called the same as the `templateId` field in a course and use it to generate the TPA for the team. In case there this template does not exist, it will use template.yaml as TPA template. For more information about the TPA refer to the Agreement Modeling section.
 
 - A **director script** and a **json** called both the same as the course in the assets folder `/public/director`. The json contains the execution information (interval, start and end) to enable it at the Director to call the script. In case these files don't exist, the director won't be called. These files have to be configured for the system to automatically generate data about the team. For example, to automatically compute metrics for a course named `class01` the files would be the following: [class01.js](https://github.com/governify/bluejay-infrastructure/blob/main/assets/public/director/class01.js) and [class01.json](https://github.com/governify/bluejay-infrastructure/blob/main/assets/public/director/class01.json).
 
@@ -32,11 +31,22 @@ By default, it can be accessed through https://join[BLUEJAY_SERVICES_PREFIX][BLU
 
 It offers an interface that works in three steps:
 
-**1.** First the GitHub Repository URL is entered and "Check" button is pressed. It will check for any mistakes on the info.yml file and, if everything is ok a second section will appear. In case you still don't have the info.yml file in the root of your repo (main or master branch) you can check this [template](https://github.com/governify/audited-project-template/blob/main/info.yml) or this [example](https://github.com/governifyauditor/goldenflow-showcase-project/blob/main/info.yml) and add it before continuing.
+**1.** First the GitHub Repository URL is entered and `Check` button is pressed. It will check for any mistakes on the info.yml file and, if everything is ok a second section will appear. In case you still don't have the info.yml file in the root of your repo (main or master branch) you can check this [template](https://github.com/governify/audited-project-template/blob/main/info.yml) or this [example](https://github.com/governifyauditor/goldenflow-showcase-project/blob/main/info.yml) and add it before continuing.
 
-**2.** A new input will appear asking for the Course name will appear. By pressing "Join" the system will check that this course exists in the scopes.json. If it doesn't add an object for storing a new course with a name for the course of your desire. Remember to restart the Scope Manager before continuing if you modified the scopes.json.
 
-**3.** If the course exists and the project was not registered previously, there will appear a success message and the system will be already registered! A badge with it's markdown will appear for teams to copy it into their README.md file for ease of access and they can click on it to access the dashboard. If the team had already registered before the badge will appear but it won't register the team again.
+<img alt="valid repo join" src="/img/guides/register-new-teams/valid-repo-join.png" width="100%" style={{ boxShadow: "0 0 0 0.1px black" }} />
+&nbsp;
+
+**2.** A new input will appear asking for the course `joinCode` and the Course name. By pressing **Join** the system will check that the joinCode matches the joinCode stored in the course, then, if the course exists in the scopes.json. If it doesn't, add an object for storing a new course with the name of your choice. Remember to restart the Scope Manager before continuing if you modified the scopes.json.
+
+:::note
+joinCode logic has been introduced to avoid teams to register to courses they are not enrolled in. This code is generated by the administrator of the course and shared with the students.
+:::
+
+**3.** If the course exists, the joinCode matches and the project was not registered previously, there will appear a success message and the system will be already registered! A badge with it's markdown will appear for teams to copy it into their README.md file for ease of access and they can click on it to access the dashboard. If the team had already registered before the badge will appear but it won't register the team again.
+
+<img alt="valid team join" src="/img/guides/register-new-teams/success.png" width="100%" style={{ boxShadow: "0 0 0 0.1px black" }} />
+&nbsp;
 
 ### Simplified register
 

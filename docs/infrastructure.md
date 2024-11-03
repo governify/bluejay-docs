@@ -25,7 +25,7 @@ The services of Bluejay Infrastructure are presented in the table below, along w
 | [Director](https://github.com/governify/director)    | 5800     | director.*[domain]* |governify/director:vX.X.X          |         governify/director:v1.5.0           |
 | [Scopes](https://github.com/governify/scope-manager) | 5700     | scopes.*[domain]*   |governify/scope-manager:vX.X.X     |         governify/scope-manager:v1.8.0           |
 | [Join](https://github.com/governify/join-bluejay)    | 6100     | join.*[domain]*     |governify/join-bluejay:vX.X.X      |        governify/join-bluejay:v1.10.0            |
-| [TPA Manager](https://github.com/governify/TPA-Manager)| 5173   | tpa-manager.*[domain]* |governify/collector-events:vX.X.X |         governify/tpa-designer:1.0.0           |
+| [TPA Manager](https://github.com/governify/TPA-Manager)| 5173   | tpa-manager.*[domain]* |governify/tpa-manager:vX.X.X |         governify/tpa-manager:v2.0.0           |
 | [Collector-events](https://github.com/governify/collector-events)| 5500 | ❌ |governify/collector-events:vX.X.X  |         governify/collector-events:v1.20.0           |
 | DB-Mongo-Registry                                    | 5001     | ❌                  |mongo:6.0                              |        mongo:6.0            |
 | DB-Influx-Reporter                                   | 5002     | ❌                  |influxdb:1.8.4-alpine              |         influxdb:1.8.4-alpine           |
