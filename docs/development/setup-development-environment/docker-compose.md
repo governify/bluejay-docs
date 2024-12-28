@@ -177,7 +177,7 @@ docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d
 ``` 
 
 ## 6. Create a new TPA for the project
-The TPA you are going to create provides information about the number of issues in progress that the members of the repository have in the project. You can find the complete TPA in the [zoo repository](https://github.com/governify/zoo/blob/main/bluejay/tpa/showcase/v1.1/tpa-showcase-v1.1.json).
+The TPA you are going to create provides information about the number of issues in progress that the members of the repository have in the project. You can find the complete TPA in the [zoo repository](https://github.com/governify/zoo/blob/main/bluejay/tpa/showcase/basic/v1.1/tpa-showcase-basic-v1.1.json).
 
 In the user interface, click on the project's Create TPA button located under Other Projects
 ![Create-TPA](../../../static/img/deployment/docker-compose-local/create-tpa.png)
