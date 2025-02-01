@@ -14,7 +14,7 @@ The [TPA Manager](https://github.com/governify/TPA-Manager/tree/course-creator-c
 
 This service emerged to fulfill the need to manage the different courses and their associated projects in a visual way, while also allowing the management of TPA templates and TPAs associated in the infraestructure. 
 
-By default, it can be accessed through https://tpa-manager[BLUEJAY_SERVICES_PREFIX][BLUEJAY_DNS_SUFFIX] (e.g. https://tpa-manager.bluejay.mydomain.org) in case Bluejay is deployed in the cloud or by accessing to http://localhost:5173 if it is deployed locally.
+By default, it can be accessed through https://tpa-manager[BLUEJAY_SERVICES_PREFIX][BLUEJAY_DNS_SUFFIX] (e.g. https://tpa-manager.bluejay.governify.io) in case Bluejay is deployed in the cloud or by accessing to http://localhost:5173 if it is deployed locally.
 
 ## TPA Templates
 

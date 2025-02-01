@@ -9,6 +9,11 @@ hide_table_of_contents: false
 
 ---
 
+
+:::warning
+This functionality is being migrated to the TPA-Manager, a new frontend for Bluejay. See [TPA-Manager documentation](../../development/bluejay-only-services/tpa-manager.md).
+:::
+
 BLUEJAY has the capability to **send reports to a Slack channel** via a Slack webhook. To activate the slack notifications for a course, navigate to de desired course using the dropdown at ***ui.bluejay.[YourDomain]*** . You must click the ***Load Course*** button.
 
 <img alt="course selector" src="/img/guides/slack/courseSelector.png" width="80%"/>
