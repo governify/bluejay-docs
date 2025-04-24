@@ -39,7 +39,11 @@ const config = {
           className: 'header-github-link',
           'aria-label': 'GitHub repository',
           target: '_blank',
-        }
+        },
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+        },
       ]
     },
     tableOfContents: {

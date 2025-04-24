@@ -1,0 +1,4 @@
+position: 4 # Sets this category to the second position in the sidebar
+label: 'Extending Bluejay'
+collapsible: true
+collapsed: true

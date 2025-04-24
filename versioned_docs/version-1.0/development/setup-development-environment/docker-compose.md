@@ -156,6 +156,7 @@ Now you have to restart the `scope-manager` container in docker. Once restarted 
 ![BJ](/img/deployment/docker-compose-local/render-bluejay.png)
 
 ### 5. Useful commands and information
+
 If you modify the scopes.json to add more projects or make any change after deploying the ecosystem, you will have to restart the `scope-manager` container.
 
 To stop the containers use:
