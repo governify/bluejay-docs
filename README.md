@@ -2,7 +2,7 @@
 
 This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-### Installation
+## Installation
 
 ```bin/bash
 npm install
@@ -27,3 +27,7 @@ This command generates static content into the `build` directory and can be serv
 ### Deployment
 
 This repository has an automated deployment pipeline that will build and deploy the website to GitHub Pages. To deploy, simply push to the `main` branch.
+
+## Bluejay Official Documentation
+
+You can access site [here](https://docs.bluejay.governify.io/)
