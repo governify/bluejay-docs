@@ -297,7 +297,7 @@ As you can see here, you can add values to your ***options*** object using integ
 
 Now you can develop your own specific fetcher. It is very important to understand a few things. You will have to create two functions. The frist one is ***getInfo***. This is the main function. It ***MUST*** return a promise and receive the options as a param. Optionally (but strongly recommended) you should add another function; ***getData/getDataPaginated***. This function only manages retrieving the information by making the http request. Please note that you will possibly need to apply the date and pagination filters and the authorization here.
 
-In case you have more than one metric in your integration, you will also need to manage each type of endpoint. There is not any guide which you have to follow a 100%, so make sure to check the other fetchers in order to have an idea of which implementation adapts better to your case.
+In case you have more than one metric in your integration, you will also need to manage each type of endpoint. There is not any guide which you have to follow a 100%, so make sure to check the other fetchers in order to have an idea of which implementation adapts better to your case. You will find some usefull functions in ***./controllers/fetcher/fetcherUtils.js***.
 
 If you want more information, please click [here](https://github.com/governify/collector-events/blob/main/CONTRIBUTING.md) to see a full example assuming we are adding **Redmine** as a new source to Collector events.
 
