@@ -81,6 +81,7 @@ Example:
 Contains the information about which services should be used to compute the metrics.
 
 In order to retrieve the data and communicate to the different microservices of the Governify ecosystem, the URLs where each component will be deployed should be specified. This should be done in the infrastructure object, as the following example:
+
 ```json
 {
     "infrastructure": {
@@ -97,9 +98,11 @@ In order to retrieve the data and communicate to the different microservices of 
 
 The most important part in the definitions is the scope. The scope defines for which service/person/process applies the metric.
 If we want to measure a company, we can have for example 3 scopes.
+
 - Project
 - Team
 - Member
+
 This scope are shared with the metric at the time of computing the metric, so, if we want to calculate for example one metric for all the projects we only have to specify:
 `project: *`
 

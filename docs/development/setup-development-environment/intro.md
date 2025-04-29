@@ -8,7 +8,9 @@ hide_table_of_contents: false
 # Setup Development Environment
 
 ---
+
 ## Overview
+
 Currently, bluejay has 2 different configurations to be deployed on your machine. It is also possible to use a combination of both that helps expand the system. The 2 ways to deploy the system are the following:
 
 - [Docker Compose](/development/setup-development-environment/docker-compose): The system is deployed completely with docker. This environment is useful to check how the final system would behave in production, since a similar configuration is used.
