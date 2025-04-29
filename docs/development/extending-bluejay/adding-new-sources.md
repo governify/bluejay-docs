@@ -100,7 +100,7 @@ Please follow all recommendations in order to make it understandable for registr
 Note that the used our new metric (**NUMBER_GITHUB_MERGE_PR**) in ***"with"*** property.
 :::
 
-At this point, we have a very clear and detailed view of what we want to include in the collector-events. We will need to add source, which is ***github***, with an eventType called ***mergedPR***, which is a type ***number*** metric.
+At this point, we have a very clear and detailed view of what we want to include in the collector-events. We will need to add source, which is ***github***, with an eventType called ***mergedPR***, which is a type ***number*** metric. If you want to know about metrics types and adding metrics, check [collecting-new-metrics](collecting-new-metrics.md) section.
 
 #### 2.1 Credentials and permissions (if needed)
 
@@ -146,13 +146,152 @@ We are ready to implement the API integration. Collector-events has an specific 
 
 #### 3.1 Add key authKeys.json
 
-Add key in ./configurations/authKeys.json
+Go to ***./configurations/authKeys.json*** file and include a key for your API. For our example, you would have to add:
+
+```json
+"github": "$_[KEY_GITHUB]",
+```
+
+:::important
+Take into account that you ***MUST*** name the property as your eventType in your TPA.
+
+```json
+    "event": {
+        "github": {
+            "mergedPR": {}
+        }
+    }
+```
+
+As in the example we added **"github"** as the event name, so we have to use **the same name in authKeys.json**.
+
+:::
 
 #### 3.2 Add desired endpoints sourcesManager.json
 
+It is time to define our endpoints. You have to go to ***./configurations/sourcesManager.json***. This file contains all the information related with the things you can include inside the events. In this json you will find for each evenType, the metrics available to use in the TPAs. As we wrote:
+
+```json
+    "event": {
+        "github": {
+            "mergedPR": {}
+        }
+    }
+```
+
+We will have to include an endpointType called ***github***, and a property called ***mergedPR***, which will be consistent with everything previously defined in the TPA. In our example, we will have to include this:
+
+```json
+    "endpoints": {
+        "github": {
+            "mergedPR": {
+                "endpoint": "/repos/{github.repoOwner}/{github.repository}/pulls?state=closed",
+                "payloadDate": "merged_at"
+            }
+        },
+    }
+```
+
+We are saying that our collector will have an endpoint whose type will be ***"github"*** (the one refered in the TPA). This new type will have a metric called ***"mergedPR"*** (the refered in the TPA). You will also have to specify two things for each new metric. The property "endpoint" tells us about the url for your API that your specific fetcher will use, and the other one, "payloadDate" points at the date property that Bluejay will use to compare data for filtering by dates. If you need any parameters in your url (such as repository name or anything), use the following notation: `[endpointType].[neededParamName]`. Eg: github.repoOwner. Please make sure that your ***neededParamName*** is the same as the one defined in scopes.json.
+
+:::important
+We use ***github.repoOwner*** because in scope.json we defined a **source** with some variables that had to be added in your API calls. Please use the same names that you included here before. Otherwise your will have a tone of weird problems.
+
+```text
+    "identities": [
+        {
+            "source": "github",
+            "repository": "repo01",
+            "repoOwner": "owner01"
+        }
+    ]
+```
+
+:::
+
+If you want to include more than one metric, instead of creating a new endpointType with the same name, add the other metrics in the sane one. Look at this example were there are more than one metric defined for a single endpointType:
+
+```json
+    "travis": {
+        "builds_public": {
+            "endpoint": "/repo/{github.repoOwner}%2F{github.repository}/builds",
+            "payloadDate": "started_at"
+        },
+        "builds_private": {
+            "endpoint": "/repo/{github.repoOwner}%2F{github.repository}/builds",
+            "payloadDate": "started_at"
+        }
+    },
+```
+
 #### 3.3 Add minimal authkey in apiv2computationsControllerService.js
 
+We are almost there. The next thing we have to do is adding a minimal authKey in ***./controllers/apiv2computationsControllerService.js*** file. Once again, use the same name for the endpointType, eventType and source. Let's see where we have to add it. Go to the part where you find the following comment: // Minimal authKeys.
+
+You will have to add a new property to authKeys. Its name must be the same as the one defined in other parts, for this example, ***"github"***.
+
+```js
+    github: {
+      getKey: function () {
+        return '';
+      }
+    }
+```
+
+With this property you will have a default auth key for your API and its value will be anempty string ('').
+
 #### 3.4 Make fetcher.js redirect your case to your specific fetcher
+
+Finally, we have to prepare the fetcher to use our specific fetcher, which will manage your new API endpoints. To do so, you will have to create a new file called: `[yourNewAPIYouWantToInclude]Fetcher.js`, where ***yourNewAPIYouWantToInclude*** is the name of the API you are integrating with Collector-events. In this example, you will have to create a file called ***githubFetcher.js***.
+
+:::tip
+Remember to add this file in the same folder where *fetcher.js* is located (***./controllers/fetcher/***).
+:::
+
+This will allow you to import this fetcher (which can be empty for now) and prepare the main fetcher in order to use your new one.To do this, go to ***./controllers/fetcher/fetcher.js*** and add at the top of the file tge import. For example: 
+
+```js
+const githubFetcher = require('./githubFetcher');
+```
+
+Now, it's as simple as adding the corresponding *"case"* inside the *"switch"*. For example:
+
+```js
+    case 'github':
+    options.token =  generateToken(integrations.github.apiKey, authKeys.github.getKey(), 'token ');
+    githubFetcher
+        .getInfo(options)
+        .then((data) => {
+        resolve(data);
+        }).catch(err => {
+        reject(err);
+        });
+    break;
+```
+
+As you can see, the case name ***MUST*** be indentical as the endpointType, in this case, "github". You will have to add the same code except for the fetcher name. A generalist switch case is:
+
+```js
+    case 'yourEndpointTypeName':
+    yourEndpointTypeNameFetcher
+        .getInfo(options)
+        .then((data) => {
+        resolve(data);
+        }).catch(err => {
+        reject(err);
+        });
+    break;
+```
+
+In case that you want to include some important information related to the url params, security or any other variable, you can do that using ***integrations***. See those examples:
+
+```js
+    options.token = generateToken(integrations.gitlab.apiKey, authKeys.gitlab.getKey(), '');
+    options.gitlabApiBaseUrl = integrations.gitlab.gitlabApiBaseUrl;
+    options.noCache = json['gitlab']['noCache'];
+```
+
+As you can see here, you can add values to your ***options*** object using integrations. There is no need for you to understand how does this data is here, but you have to take into account that these values are the ones defined in ***identities*** and ***credentials*** properties defined in ***scopes.json*** previously mencioned before, so do not forget that. If any information is missing, check that file. Now you are prepared to develop your new fetcher and integrate your API.
 
 ### 4. Developing your specific fetcher
 
