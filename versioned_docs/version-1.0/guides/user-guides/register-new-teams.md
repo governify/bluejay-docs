@@ -18,7 +18,7 @@ As explained [here](http://localhost:3000/customization/configuration#scope-file
 
 For making the process of adding teams to be audited in the system more intuitive, **Join** is another microservice serving a simple frontend which is enough for this purpose. It gives the teams the ability to register by themselves into the system without the need of an administrator to do it.
 
-By default, it can be accessed through https://join[BLUEJAY_SERVICES_PREFIX][BLUEJAY_DNS_SUFFIX] (e.g. https://join.bluejay.mydomain.org) in case Bluejay is deployed in the cloud or by accessing to http://localhost:6001 if it is deployed locally.
+By default, it can be accessed through `https://join[BLUEJAY_SERVICES_PREFIX][BLUEJAY_DNS_SUFFIX]` (e.g. https://join.bluejay.mydomain.org) in case Bluejay is deployed in the cloud or by accessing to http://localhost:6001 if it is deployed locally.
 
 **Bear in mind** that when registering a team to a course, the system will look for:
 

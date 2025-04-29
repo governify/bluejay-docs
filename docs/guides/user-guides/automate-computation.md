@@ -11,7 +11,7 @@ This guide will help you manage and automate various computations and notificati
 
 ## Accessing Bluejay TPA Manager
 
-First, navigate to [Bluejay TPA Manager](https://tpa-manager.bluejay.governify.io/) or your specific implementation (https://tpa-manager[BLUEJAY_SERVICES_PREFIX][BLUEJAY_DNS_SUFFIX]). This platform allows you to manage and automate computations and notifications effectively.
+First, navigate to [Bluejay TPA Manager](https://tpa-manager.bluejay.governify.io/) or your specific implementation (`https://tpa-manager[BLUEJAY_SERVICES_PREFIX][BLUEJAY_DNS_SUFFIX]`). This platform allows you to manage and automate computations and notifications effectively.
 
 ## Managing Calculations in the Course Browser Page
 
