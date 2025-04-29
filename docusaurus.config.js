@@ -24,7 +24,6 @@ const config = {
   markdown: { mermaid: true },
   themes: [
     '@docusaurus/theme-mermaid',
-    ["@easyops-cn/docusaurus-search-local", { hashed: true, indexBlog: false }]
   ],
   themeConfig: {
     prism: { theme: lightCodeTheme, darkTheme: darkCodeTheme },
@@ -45,6 +44,13 @@ const config = {
           position: 'right',
         },
       ]
+    },
+    algolia: {
+      appId: 'YQHRCYNID5',
+      apiKey: '9b86903fbb22c3d88d39db14789b3ce0',
+      indexName: 'bluejay-governify',
+      contextualSearch: true,
+      searchParameters: {}, 
     },
     tableOfContents: {
       minHeadingLevel: 2,
