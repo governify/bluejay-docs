@@ -2,7 +2,7 @@
 title: Adding New Sources
 description: Adding new sources to Governify.
 hide_table_of_contents: false
-sidebar_class_name: external-link::github.com/governify/collector-events/blob/main/CONTRIBUTING.md
+# sidebar_class_name: external-link::github.com/governify/collector-events/blob/main/CONTRIBUTING.md
 ---
 
 # Adding new sources
