@@ -109,9 +109,197 @@ In case none of the current metrics types adapt to your metric, please reconside
     }
 ```
 
+:::tip
+It is highly recommended to return original array as evidences if you can make all the computation with it. If you want to return other things as metrics ***do not forget*** to also include the array.
+:::
+
+:::danger
+Please check metric type ***value*** for agregated calculations because you might need to add it there.
+:::
+
 Once done that, you can complete the addition following the tutorial.
 
 ### Adding new metrics
+
+In order to add a new metric. You will have to follow these steps. Do not forget to understand them because this will help you a lot in the future and it also will allow you to code faster and avoid problems.
+
+:::important
+Please bear in mind that some steps are ***identical*** to adding new-sources tutorial. Those steps will be marked with an asterisk (*). We strongly recommend also visiting [adding new sources](adding-new-sources.md) sections because both parts of the documentation are very close to each other and the only difference is that here we will focus on adding a new metric in an already integrated API. 
+:::
+
+### 1. Forking official repo *
+
+In order to develop anything, you will have to fork [collector-events](https://github.com/governify/collector-events) repository. Do not forget to fork the ***develop*** branch. Then, clone the fork and check [***setup developent eviroment section***](../setup-development-environment/intro.md) before proceeding.
+
+### 2. Design new metric and define enviroment
+
+Design a TPA that uses the API that you want to extend and see which endpoints we should add in the collector. Let's pretend that we want to extend Github API. We should think about a metric that can lead to a guarantee in a TPA, for example: "NUMBER_GITHUB_MERGE_PR", which will measure the number of merged Pull requests in a repository. If we have setted up developement eviroment properly, we will have an example TPA. We should create another one from it and remove the other metrics. Once we have done that, we will add our desired metric following the correct format and notation. In this case, we will add something like this inside ***metrics*** property in the new TPA:
+
+```json
+"metrics": {
+    "NUMBER_GITHUB_MERGE_PR": {
+        "collector": {
+            "$ref": "#/context/definitions/collectors/eventcollector"
+        },
+        "measure": {
+            "computing": "actual",
+            "element": "number",
+            "event": {
+                "github": {
+                    "mergedPR": {}
+                }
+            },
+            "scope": {
+                "$ref": "#/context/definitions/scopes/development"
+            }
+        }
+    }
+}
+```
+
+:::important
+See how we defined an event using the existing source name (**github**) and a new endpoint type (**mergedPR**). This will be essential later, so keep that in mind. See how we defined our metric type using the property ***"element"***. To keep it simple, we are going to use type number.
+:::
+
+Now, we will need to specify in the guarantees the new metric to be able to use it in a reasonable way. Let's add a new metric in ***guarantees*** property.
+
+:::important
+Please follow all recommendations in order to make it understandable for registry and collector-events. Remember that your TPA ***must*** follow [iAgre specification](https://docs.governify.io/references/iAgree)
+:::
+
+```json
+    "guatantees": [
+        {
+            "id": "NUMBER_MASTER_PR_MERGE_WEEKLY_OVER_1_OR_EQUAL",
+            "notes": "#### Description\r\n```\r\nTP-1: At least 75% of delivered stories(PT) must match a the merge of a PR into master within a day.",
+            "description": "At least 75% of delivered stories must match the merge of a PR into master within a day.",
+            "scope": {
+                "$ref": "#/context/definitions/scopes/development"
+            },
+            "of": [
+                {
+                    "scope": {
+                        "project": "1010101010"
+                    },
+                    "objective": "NUMBER_GITHUB_MERGE_PR >= 1",
+                    "with": {
+                        "NUMBER_GITHUB_MERGE_PR": {}
+                    },
+                    "window": {
+                        "type": "static",
+                        "period": "weekly",
+                        "initial": "2018-01-01"
+                    }
+                }
+            ]
+        }
+    ]
+```
+
+:::important
+Note that the used our new metric (**NUMBER_GITHUB_MERGE_PR**) in ***"with"*** property.
+:::
+
+At this point, we have a very clear and detailed view of what we want to include in the collector-events. We will need to add a metric in n existing source, which is ***github***, with a new eventType called ***mergedPR***, which is a type ***number*** metric. In case you are using a new metric type, do not forget to implement it first.
+
+#### 2.1 Credentials and permissions (if needed)
+
+In case you need some sort of token and external data to retrieve metrics go to ***scopes.json*** file, in scope-manager, and add there all the data (if its not already added). In ***identities*** property you can add an object specifying all the url params that you want to include.
+
+```json
+{
+    "development": [
+        {
+            "classId": "class01",
+            "identities": [],
+            "credentials": [],
+            "projects": [
+                {
+                    "projectId": "project01",
+                    "identities": [
+                        {
+                            "source": "github",
+                            "repository": "repo01",
+                            "repoOwner": "owner01"
+                        }
+                    ],
+                    "credentials": [
+                        {
+                          "source": "github",
+                          "apiKey": "githubToken"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+```
+
+:::tip
+Bear in mind that credentials are included in ***credentials*** property. You can add there your API tokens securely.
+:::
+
+### 3. Add desired endpoints sourcesManager.json
+
+It is time to define our endpoints. You have to go to ***./configurations/sourcesManager.json***. This file contains all the information related with the things you can include inside the events. In this json you will find for each evenType, the metrics available to use in the TPAs. As we wrote:
+
+```json
+    "event": {
+        "github": {
+            "mergedPR": {}
+        }
+    }
+```
+
+We will have to serch the endpointType called ***github***, because its the source we are trying to extend. Then, we add a property called ***mergedPR***, which will be consistent with everything previously defined in the TPA. In our example, we will have to include this:
+
+```json
+    "endpoints": {
+        "github": {
+            "mergedPR": {
+                "endpoint": "/repos/{github.repoOwner}/{github.repository}/pulls?state=closed",
+                "payloadDate": "merged_at"
+            }
+        },
+    }
+```
+
+We are saying that our collector will have an endpoint whose type will be ***"github"*** (the one refered in the TPA). This new type will have a metric called ***"mergedPR"*** (the refered in the TPA). You will also have to specify two things for each new metric. The property "endpoint" tells us about the url for your API that your specific fetcher will use, and the other one, "payloadDate" points at the date property that Bluejay will use to compare data for filtering by dates. If you need any parameters in your url (such as repository name or anything), use the following notation: `[endpointType].[neededParamName]`. Eg: github.repoOwner. Please make sure that your ***neededParamName*** is the same as the one defined in scopes.json.
+
+:::important
+We use ***github.repoOwner*** because in scope.json we defined a **source** with some variables that had to be added in your API calls. Please use the same names that you included here before. Otherwise your will have a tone of weird problems.
+
+```text
+    "identities": [
+        {
+            "source": "github",
+            "repository": "repo01",
+            "repoOwner": "owner01"
+        }
+    ]
+```
+
+:::
+
+If you want to include more than one metric, add the other metrics in the sane one. Look at this example were there are more than one metric defined for a single endpointType:
+
+```json
+    "travis": {
+        "builds_public": {
+            "endpoint": "/repo/{github.repoOwner}%2F{github.repository}/builds",
+            "payloadDate": "started_at"
+        },
+        "builds_private": {
+            "endpoint": "/repo/{github.repoOwner}%2F{github.repository}/builds",
+            "payloadDate": "started_at"
+        }
+    },
+```
+
+### 4. Extending the specific fetcher
+
+Now you can extend the specific fetcher. It is very important to understand a few things. Go to ***getInfo*** function. This is the main function. It ***MUST*** return a promise and receive the options as a param, so do not change that. Here you will have to create a case where the endpoint is the one refered to your new metric. In that case add your code and return the correct object. Remember that the data treatment you will have to do must result into an array, because the collector will manage it and process the data by itself following the specified metric type. There is not any guide which you have to follow a 100%, so make sure to check the other fetchers in order to have an idea of which implementation adapts better to your case. You will find some usefull functions in ***./controllers/fetcher/fetcherUtils.js***.
 
 If you want more information, feel free to click [here](https://github.com/governify/collector-events/blob/main/DEVELOPING%20METRICS.md) to see a full example assuming we are adding a more complex **Github** metric using Github's GraphQL API as a new metric to Collector events.
 
