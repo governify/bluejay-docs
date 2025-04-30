@@ -19,21 +19,21 @@ To develop a feature with `Scope-Manager` is as simple as shutting the microserv
 
 1. Stop the container with this command or using the docker desktop application UI:
 
-```bin/bash
-docker stop bluejay-scope-manager
-```
+    ```bin/bash
+    docker stop bluejay-scope-manager
+    ```
 
 2. Clone the microservice:
 
-```bin/bash
-git clone https://github.com/governify/scope-manager.git
-```
+    ```bin/bash
+    git clone https://github.com/governify/scope-manager.git
+    ```
 
 3. Install the dependencies and start the microservice:
 
-```bin/bash
-npm i
-node index
-```
+    ```bin/bash
+    npm i
+    node index
+    ```
 
 It will start in the same port as the container was and will be properly connected to the entire infrastructure.

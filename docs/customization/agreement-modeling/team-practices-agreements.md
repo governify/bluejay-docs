@@ -221,7 +221,7 @@ You can see a complete guide about metric modelling in the [Metrics section](/cu
 
 #### Guarantees
 
-The guarantees specify the quality or performance that the metrics should have. The objective is a formula that can be composed from one or more metrics. The window object refers to the calculation timing, where the period is used for how the period of time are splitted in time. 
+The guarantees specify the quality or performance that the metrics should have. The objective is a formula that can be composed from one or more metrics. The window object refers to the calculation timing, where the period is used for how the period of time are splitted in time.
 
 For example for a daily period there will be one data point for each day, and the metric is calculated from all the data from that day. This is an example using the metric from the previous example:
 

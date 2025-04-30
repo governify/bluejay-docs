@@ -124,7 +124,7 @@ Once done that, you can complete the addition following the tutorial.
 In order to add a new metric. You will have to follow these steps. Do not forget to understand them because this will help you a lot in the future and it also will allow you to code faster and avoid problems.
 
 :::important
-Please bear in mind that some steps are ***identical*** to adding new-sources tutorial. Those steps will be marked with an asterisk (*). We strongly recommend also visiting [adding new sources](adding-new-sources.md) sections because both parts of the documentation are very close to each other and the only difference is that here we will focus on adding a new metric in an already integrated API. 
+Please bear in mind that some steps are ***identical*** to adding new-sources tutorial. Those steps will be marked with an asterisk (*). We strongly recommend also visiting [adding new sources](adding-new-sources.md) sections because both parts of the documentation are very close to each other and the only difference is that here we will focus on adding a new metric in an already integrated API.
 :::
 
 ### 1. Forking official repo *

@@ -5,7 +5,9 @@ hide_table_of_contents: false
 sidebar_position: 1
 
 ---
+
 # TPA Manager
+
 ---
 
 ## Overview

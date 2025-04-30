@@ -248,7 +248,7 @@ Finally, we have to prepare the fetcher to use our specific fetcher, which will 
 Remember to add this file in the same folder where *fetcher.js* is located (***./controllers/fetcher/***).
 :::
 
-This will allow you to import this fetcher (which can be empty for now) and prepare the main fetcher in order to use your new one.To do this, go to ***./controllers/fetcher/fetcher.js*** and add at the top of the file tge import. For example: 
+This will allow you to import this fetcher (which can be empty for now) and prepare the main fetcher in order to use your new one.To do this, go to ***./controllers/fetcher/fetcher.js*** and add at the top of the file tge import. For example:
 
 ```js
 const githubFetcher = require('./githubFetcher');

@@ -22,25 +22,25 @@ This guide will help you deploy Governify-Falcon in a Kubernetes cluster.
 1. Create Namespace
 
     ```bin/bash
-    $    kubectl create namespace governify-falcon
+    kubectl create namespace governify-falcon
     ```
 
 2. Install Contour
 
     ```bin/bash
-    $    kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
+    kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
     ```
 
 3. Wait a few minutes and get the Load Balancer IP Address
 
     ```bin/bash
-    $    (kubectl get -n projectcontour service envoy -o json) | jq -r '.status.loadBalancer.ingress[0].ip'
+    (kubectl get -n projectcontour service envoy -o json) | jq -r '.status.loadBalancer.ingress[0].ip'
     ```
 
 4. Install CertManager
 
     ```bin/bash
-    $    kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.yaml
+    kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.yaml
     ```
 
 5. Create a values.yaml file with the following content
@@ -61,9 +61,9 @@ This guide will help you deploy Governify-Falcon in a Kubernetes cluster.
 6. Install charts
 
     ```bin/bash
-    $    helm repo add governify https://governify.github.io/helm-charts
-    $    helm repo update
-    $    helm install -f values.yaml falcon governify/Governify-Falcon
+    helm repo add governify https://governify.github.io/helm-charts
+    helm repo update
+    helm install -f values.yaml falcon governify/Governify-Falcon
     ```
 
 More information about the configuration options available for Governify-Falcon HELM chart can be found at our [HELM Charts repository](https://github.com/governify/helm-charts/tree/main/infrastructure/Governify-Falcon).
@@ -81,7 +81,7 @@ Governify provides Helm charts for deploying Bluejay services inside a Kubernete
 **1.** Create Namespace
 
 ```bin/bash
-$    kubectl create namespace governify-bluejay
+kubectl create namespace governify-bluejay
 ```
 
 **2.** Configure kubernetes for assigning NodePorts in range (3000-9000) by adding `--service-node-port-range=3000-6000` to the kubernetes kube-apiserver config file. If using docker-desktop [check this page](https://stackoverflow.com/questions/64758012/location-of-kubernetes-config-directory-with-docker-desktop-on-windows).
@@ -104,9 +104,9 @@ $    kubectl create namespace governify-bluejay
 **4.** Install charts
 
 ```bin/bash
-$    helm repo add governify https://governify.github.io/helm-charts
-$    helm repo update
-$    helm install -f values.yaml <release_name> governify/<chart_name>
+helm repo add governify https://governify.github.io/helm-charts
+helm repo update
+helm install -f values.yaml <release_name> governify/<chart_name>
 ```
 
 More information about the configuration options available for Governify-Bluejay HELM chart can be found at our [HELM Charts repository](https://github.com/governify/helm-charts/tree/main/infrastructure/Governify-Bluejay).

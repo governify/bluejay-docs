@@ -19,7 +19,7 @@ The collectors are the component which receiving a metric as input, are able to 
 
 Actually, there are 3 different collectors available. The metrics are modeled as a JSON object following the iAgree specification. Each collector has his own syntax and they are similar in order to be consistent but there are some differences in order to extend the features.
 
-### Event Collector 
+### Event Collector
 
 The Event Collector is capable of using different data sources as input and join the information in order to correlate different payloads composing more complex metrics. Actually it can fetch information from Github, Pivotal Tracker, Travis CI, CodeClimate and Heroku.
 
