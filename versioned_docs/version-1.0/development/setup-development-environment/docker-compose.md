@@ -12,11 +12,13 @@ hide_table_of_contents: false
 This guide deploys bluejay with the docker ecosystem in a local/development environment. During this guide the system is deployed with docker, a class is created, a TPA is created for that class and a calculation is carried out to display the first points on the graphs.
 
 ## Prerequisites
+
 - Windows OS, Linux or macOS with the following installed packages:
    - docker
    - docker-compose (version 1.27 or greater)
 - Ports 80, 443 open on the server.
 - In case you are running a linux machine, you need to asociate the host.docker.internal url to 172.17.0.1 (docker's gateway)
+
 ```ssh
 host-manager -add host.docker.internal 172.17.0.1
 ```
@@ -26,12 +28,17 @@ Most of Bluejay's Docker images are built using the linux/amd64 platform. If usi
 :::
 
 ## 1. Clone Repo
+
 Clone latest release of [Bluejay Infrastructure repository](https://github.com/governify/bluejay-infrastructure):
-```
+
+```bin/bash
 git clone https://github.com/governify/bluejay-infrastructure.git
 ```
+
 ## 2. Add '.env' file
+
 The `.env` file is used to configure environmental variables used in your specific deployment. The content of this file must be the following:
+
 ```yaml
 # GENERAL (Mandatory for deployment)
 
@@ -71,17 +78,22 @@ KEY_SCOPE_MANAGER=bluejay-scopes-private-key
 # Compose config
 COMPOSE_HTTP_TIMEOUT=200
 ```
+
 ### 2.1 Create Github token
+
 Generating a Github token is an essential step. With this key Blujay is able to communicate with the app to retrieve information about the repository that you want to audit. This token is not generated in any specific repo, it serves as a personal private API key in your account.
+
 - Navigate to your github account and then go to  `Settings>Developer Settings` (at the end of the menu).
 - Go to `Personal access tokens > Tokens (classic)`
-- Click on `Generate new token > Generate new token (classic)` 
+- Click on `Generate new token > Generate new token (classic)`
 - The scopes you select are up to you, but you need at least **repository**, **project** and **user** access.
 - Click on `Generate token` and make sure to copy the given key and paste it into `KEY_GITHUB` in the `.env` file.
 
 ## 3. Deploy with Docker Compose
+
 Now we can deploy the system with the following command:
-```
+
+```bin/bash
 docker-compose -f docker-bluejay/docker-compose-local.yaml --env-file .env up -d 
 ```
 
@@ -95,7 +107,9 @@ Navigate to localhost:5100 to access the main page of Bluejay. A prompt like the
 Governify ecosystem with bluejay services should have been deployed in your machine.
 
 ## 4. Create scopes.json
+
 Within the `assets/private/scope-manager` directory, you will discover a file named `scopes.json.example`. This file serves as a blueprint, guiding us in the creation of our custom `scopes.json`, which will be located within the same directory as the example. You can copy the following contents into your scopes file as a test, although the `scopes.json.example` file already includes this content. We will use a test repository to audit our first project and which you can find on github: [bluejay-showcase](https://github.com/governify/bluejay-showcase)
+
 ```json
 {
     "development": [

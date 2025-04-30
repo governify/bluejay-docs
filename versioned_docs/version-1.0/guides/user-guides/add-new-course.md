@@ -15,7 +15,8 @@ This service is in rapid development. New features may be added or differ from t
 :::
 
 :::info bear in mind
-   - Before starting the tutorial, it's important to note that a valid authorization is required to use some features. 
+
+   - Before starting the tutorial, it's important to note that a valid authorization is required to use some features.
 
    - If you are in the development environment, the correct authorization depends on where the [Scopes Manager service](https://docs.governify.io/development/services/scopes-manager) is running. On console: `c025ff8502893fc6c5a87cf3febe4882` or docker: `bluejay-scopes-private-key`.
 
@@ -23,6 +24,7 @@ This service is in rapid development. New features may be added or differ from t
 
    - [How to add the authorization?](/development/bluejay-only-services/tpa-manager#authorization)
 :::
+
 ## Navegate to create a new course
 
 First of all, being on the TPA Manager, you must navigate to the ***Create Course*** page. You can do this by clicking on the ***New Course*** button.
@@ -45,24 +47,23 @@ Once you're in the Templates section, you can save a template by downloading fro
 
 **Please follow these steps** to create one template:
 
-1.  **Click create from sample** 
+1.  **Click create from sample**
 
-<img alt="create template dialog" src="/img/guides/add-new-course/createtemplatedialog.png" width="50%" style={{ boxShadow: "0 0 0 0.1px black" }} />
-&nbsp;
-
+   <img alt="create template dialog" src="/img/guides/add-new-course/createtemplatedialog.png" width="50%" style={{ boxShadow: "0 0 0 0.1px black" }} />
+   &nbsp;
 
 2.  You will see a dialog where you can fill the template id and upload the file.
-   
+
    :::info bear in mind
       - Tempate id must be in the format `template-<name>-version`
       - Version must be `vX-X-X` where X is a number
       - Example: `template-PSG2-2425-v1-3s-12`
    :::
-      
+
 3.  **Press add Button**. This will create the template and redirect you to the Templates section. The new template will be listed and you will be able to edit and delete it.
 
-<img alt="template created" src="/img/guides/add-new-course/templatecreated.png" width="80%" style={{ boxShadow: "0 0 0 0.1px black" }} />
-&nbsp;
+   <img alt="template created" src="/img/guides/add-new-course/templatecreated.png" width="80%" style={{ boxShadow: "0 0 0 0.1px black" }} />
+   &nbsp;
 
 ## Return to Create Course Page and fill the fields
 
@@ -91,6 +92,5 @@ Once you have filled in all the fields, click the **Create** button. If the cour
 
 <img alt="course created" src="/img/guides/add-new-course/coursecreated.png" width="90%" style={{ boxShadow: "0 0 0 0.1px black" }} />
 &nbsp;
-
 
 Now that the course has been created, you can proceed to [Register new Teams](register-new-teams.md) to add teams to the course.

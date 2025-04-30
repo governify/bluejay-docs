@@ -12,62 +12,61 @@ hide_table_of_contents: false
 This guide will help you deploy Governify-Falcon in a Kubernetes cluster.
 
 ## Prerequisites
+
 - Kubernetes cluster with HELM installed
 - A domain with the ability to modify DNS records.
 - Ports 80, 443 open for the cluster.
 
 ## Infrastructure setup
+
 1. Create Namespace
-```
-$    kubectl create namespace governify-falcon
-```
+
+    ```bin/bash
+    kubectl create namespace governify-falcon
+    ```
 
 2. Install Contour
-```
-$    kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
-```
+
+    ```bin/bash
+    kubectl apply -f https://projectcontour.io/quickstart/contour.yaml
+    ```
 
 3. Wait a few minutes and get the Load Balancer IP Address
-```
-$    (kubectl get -n projectcontour service envoy -o json) | jq -r '.status.loadBalancer.ingress[0].ip'
-```
+
+    ```bin/bash
+    (kubectl get -n projectcontour service envoy -o json) | jq -r '.status.loadBalancer.ingress[0].ip'
+    ```
 
 4. Install CertManager
-```
-$    kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.yaml
-```
+
+    ```bin/bash
+    kubectl apply -f https://github.com/jetstack/cert-manager/releases/download/v1.1.0/cert-manager.yaml
+    ```
 
 5. Create a values.yaml file with the following content
-```
-    global:
-        node_env: production
-        gov_infrastructure: http://falcon-assets-manager/api/v1/public/infrastructure.yaml
-        services_prefix: .<infrastructure-prefix>
-        dns_suffix: .<your-DNS-zone>
-        login_user: governify-admin
-        login_password: governify-project
-    
-    assets_manager:
-        private_key: somerandomkey
-```
+
+    ```bin/bash
+        global:
+            node_env: production
+            gov_infrastructure: http://falcon-assets-manager/api/v1/public/infrastructure.yaml
+            services_prefix: .<infrastructure-prefix>
+            dns_suffix: .<your-DNS-zone>
+            login_user: governify-admin
+            login_password: governify-project
+        
+        assets_manager:
+            private_key: somerandomkey
+    ```
 
 6. Install charts
-```
-$    helm repo add governify https://governify.github.io/helm-charts
-$    helm repo update
-$    helm install -f values.yaml falcon governify/Governify-Falcon
-```
+
+    ```bin/bash
+    helm repo add governify https://governify.github.io/helm-charts
+    helm repo update
+    helm install -f values.yaml falcon governify/Governify-Falcon
+    ```
 
 More information about the configuration options available for Governify-Falcon HELM chart can be found at our [HELM Charts repository](https://github.com/governify/helm-charts/tree/main/infrastructure/Governify-Falcon).
-
-
-
-
-
-
-
-
-
 
 ## Deploying the system in a Kubernetes cluster Governify-Bluejay
 
@@ -80,14 +79,16 @@ Governify provides Helm charts for deploying Bluejay services inside a Kubernete
 ### Steps
 
 **1.** Create Namespace
-```
-$    kubectl create namespace governify-bluejay
+
+```bin/bash
+kubectl create namespace governify-bluejay
 ```
 
 **2.** Configure kubernetes for assigning NodePorts in range (3000-9000) by adding `--service-node-port-range=3000-6000` to the kubernetes kube-apiserver config file. If using docker-desktop [check this page](https://stackoverflow.com/questions/64758012/location-of-kubernetes-config-directory-with-docker-desktop-on-windows).
 
 **3.** Create a values.yaml file with the following content
-```
+
+```yaml
     global:
         node_env: development
         gov_infrastructure: <assets_call_to_infrastructure-local.yaml>
@@ -101,10 +102,11 @@ $    kubectl create namespace governify-bluejay
 ```
 
 **4.** Install charts
-```
-$    helm repo add governify https://governify.github.io/helm-charts
-$    helm repo update
-$    helm install -f values.yaml <release_name> governify/<chart_name>
+
+```bin/bash
+helm repo add governify https://governify.github.io/helm-charts
+helm repo update
+helm install -f values.yaml <release_name> governify/<chart_name>
 ```
 
 More information about the configuration options available for Governify-Bluejay HELM chart can be found at our [HELM Charts repository](https://github.com/governify/helm-charts/tree/main/infrastructure/Governify-Bluejay).

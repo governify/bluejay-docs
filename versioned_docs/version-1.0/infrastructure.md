@@ -30,4 +30,3 @@ The services of Bluejay Infrastructure are presented in the table below, along w
 | DB-Mongo-Registry                                    | 5001     | ❌                  |mongo:6.0                              |        mongo:6.0            |
 | DB-Influx-Reporter                                   | 5002     | ❌                  |influxdb:1.8.4-alpine              |         influxdb:1.8.4-alpine           |
 | DB-Collector-Redis                                   | 5003     | ❌                  |redis                              |          redis          |
-

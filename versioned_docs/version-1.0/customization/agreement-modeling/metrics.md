@@ -19,13 +19,14 @@ The collectors are the component which receiving a metric as input, are able to 
 
 Actually, there are 3 different collectors available. The metrics are modeled as a JSON object following the iAgree specification. Each collector has his own syntax and they are similar in order to be consistent but there are some differences in order to extend the features.
 
-### Event Collector 
+### Event Collector
 
 The Event Collector is capable of using different data sources as input and join the information in order to correlate different payloads composing more complex metrics. Actually it can fetch information from Github, Pivotal Tracker, Travis CI, CodeClimate and Heroku.
 
 #### Patterns
 
 The metrics available to use in the Event Collector follow 4 different patterns:
+
 1. [Number of **[Event]** in **[Tool]** every **[Period]** by **[TEAM|MEMBER]**](https://github.com/isa-group/governify-examples/blob/master/metrics/event-collector/README.md#pattern_1)
 2. [**[MAX|MIN|AVG|STD|NEWEST|LATEST]** **[Property]** value of **[Event]** in **[Tool]** every **[Period]** by team.](https://github.com/isa-group/governify-examples/blob/master/metrics/event-collector/README.md#pattern_2)
 3. [**[Frequency]** distribution of **[Event]** in **[Tool]** every **[Period]** by team.](https://github.com/isa-group/governify-examples/blob/master/metrics/event-collector/README.md#pattern_3)
@@ -44,6 +45,7 @@ Right now these are the events available for each tool:
 Here we are showing 4 different examples with their corresponding JSON format using the patterns above. Bear in mind that this is the DSL of the metric and the period is not displayed because it belongs to the guarantee:
 
 **1. NUMBER_PT_STARTEDSTORIES:** Number of `STARTED_STORIES` in `PIVOTAL` every `DAY` by `MEMBER`
+
 ```json
 {
     "metric": {
@@ -64,6 +66,7 @@ Here we are showing 4 different examples with their corresponding JSON format us
 ```
 
 **2. VALUE_CC_COVERAGE_AVG:** `AVG COVERAGE` value of `COVERAGE_REPORT` in `CODECLIMATE` every `WEEK` by team.
+
 ```json
 
 {
@@ -89,6 +92,7 @@ Here we are showing 4 different examples with their corresponding JSON format us
 ```
 
 **3. STDEV_TR_SUCCESSFULBUILDS_DAILY:** `DAILY` distribution of `SUCCESSFUL_BUILDS` in `TRAVIS` every `WEEK` by team
+
 ```json
 {
     "metric": {
@@ -114,6 +118,7 @@ Here we are showing 4 different examples with their corresponding JSON format us
 ```
 
 **4. PERCENTAGE_GH_NEWBRANCH_PT_STARTEDSTORIES:** Percentage of `NEW_BRANCH` in `GITHUB` correlated with `START_STORY` in `PIVOTAL_TRACKER` within `1_HOUR` every `WEEK` by team.
+
 ```json
 {
     "metric": {
@@ -149,7 +154,6 @@ Here we are showing 4 different examples with their corresponding JSON format us
 
 For a **full list of metric pattern examples**, please follow [this link](https://github.com/isa-group/governify-examples/blob/master/metrics/event-collector/README.md) where you can found the following examples:
 
-
 **Non correlation metrics:**
 
 | Metric Type | Tool            | Event                    | DSL Definition                                                                                                                     |
@@ -170,7 +174,6 @@ For a **full list of metric pattern examples**, please follow [this link](https:
 | Value       | CodeClimate     | Coverage Offsetted       | [Show definition](https://github.com/isa-group/governify-examples/blob/master/metrics/event-collector#value_cc_coverage_offset)    |
 | STDev       | GitHub          | Daily Merged PR          | [Show definition](https://github.com/isa-group/governify-examples/blob/master/metrics/event-collector#stdev_gh_mergepr_daily)      |
 
-
 **Correlation metrics:**
 
 | Metric Type | Tool 1         | Event 1                  | Tool 2          | Event 2           | Correlation Type | DSL Definition                                                                                                                                          |
@@ -187,15 +190,18 @@ For a **full list of metric pattern examples**, please follow [this link](https:
 | Percentage  | Travis         | Successful Builds        | Travis          | Builds            | Time Window      | [Show definition](https://github.com/isa-group/governify-examples/blob/master/metrics/event-collector#percentage_tr_successfulbuilds_tr_builds)         |
 | Percentage  | CodeClimate    | Coverage reports over 80 | CodeClimate     | Coverage reports  | Time Window      | [Show definition](https://github.com/isa-group/governify-examples/blob/master/metrics/event-collector#percentage_cc_coverageover80_cc_coverage)         |
 
-
 ### Pivotal Tracker Collector
-The PT Collector connects with Pivotal Tracker and can produce more specific metrics using the different payloads. 
+
+The PT Collector connects with Pivotal Tracker and can produce more specific metrics using the different payloads.
 
 #### Examples
+
 There is a [webpage](https://github.com/isa-group/governify-examples/blob/master/metrics/pt-collector) with available examples for public usage.
 
 ### GitHub Collector
-Using GitHub API v4, it can access to the information from GitHub Projects Kanbans in order to keep track of the different cards and the changes. 
+
+Using GitHub API v4, it can access to the information from GitHub Projects Kanbans in order to keep track of the different cards and the changes.
 
 #### Examples
+
 There is a [webpage](https://github.com/isa-group/governify-examples/blob/master/metrics/gh-collector) with available examples for public usage.

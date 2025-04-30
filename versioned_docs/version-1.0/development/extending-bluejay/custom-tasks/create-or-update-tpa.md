@@ -12,6 +12,7 @@ hide_table_of_contents: false
 Bluejay allows you to create new TPAs ​​for uncreated projects from templates or update the TPAs ​​of projects that have already been created.
 
 For this, the TPA creation or update script is used. This script allows you to do 2 actions:
+
 - **Create a tpa for an uncreated project** from a template.
 - **Update the TPAs of a set of projects** that must include a given chain fragment. All those that meet this criterion will be updated with the TPA from the specified template.
 
@@ -20,7 +21,8 @@ This script is one of the [Custom Tasks of Extending Governify](https://docs.gov
 In this document, we will discuss how to load, configure, and run the script from the user interface. If you want to see the inner workings of this script, we will provide an explanation of the technical details in the last section.
 
 ## Load Optimize Calculation Period
-1. Go to  ***ui.bluejay.[YourDomain]*** 
+
+1. Go to  ***ui.bluejay.[YourDomain]***
 2. Click on Admin UI
 3. Click on the Task Runner tab
 4. Open the dropdown and select **createOrUpdateClassTPA.**
@@ -29,17 +31,19 @@ In this document, we will discuss how to load, configure, and run the script fro
 
 ## Configure the script
 
-- **template**: *string*.    
-> A string representing the TPA template to use. This template must be stored in the assets-manager, within public/renders/tpa. The string will be the name of the file without including the .json ending.
-- **mode**: *string*. 
-> A string representing replace or create, depending on whether we want to replace a TPA for an already created project or create a TPA for an uncreated project.
+- **template**: *string*.
+    > A string representing the TPA template to use. This template must be stored in the assets-manager, within public/renders/tpa. The string will be the name of the file without including the .json ending.
+- **mode**: *string*.
+    > A string representing replace or create, depending on whether we want to replace a TPA for an already created project or create a TPA for an uncreated project.
 - **agreementId**: *string*.
-> A string representing the projectId of the project that you want to update or create. In case of replacement, a regexp is used and all projects that comply with the chain will be updated with the new TPA. In case of creating, the specific projectId of the project must be entered.
+    > A string representing the projectId of the project that you want to update or create. In case of replacement, a regexp is used and all projects that comply with the chain will be updated with the new TPA. In case of creating, the specific projectId of the project must be entered.
 - **classId**: *string*.
-> Only used in create. A string representing the classId of the class to which the project we want to create belongs.
+    > Only used in create. A string representing the classId of the class to which the project we want to create belongs.
 
 ### Configuration example
+
 #### Replace
+
 Replacing the TPA of all projects that contain "showcase" in their projectId with the template called "template".
 
 ```json
@@ -51,8 +55,8 @@ Replacing the TPA of all projects that contain "showcase" in their projectId wit
 ```
 
 #### Create
-Creating a new TPA with the template called "template" for the project with projectId "showcase-GH-governify_bluejay-showcase" belonging to the class with classId "showcase".
 
+Creating a new TPA with the template called "template" for the project with projectId "showcase-GH-governify_bluejay-showcase" belonging to the class with classId "showcase".
 
 ```json
 {
@@ -64,11 +68,13 @@ Creating a new TPA with the template called "template" for the project with proj
 ```
 
 ## Run the script
-**Click run** and you will see the results in the log of **Result.json.** 
+
+**Click run** and you will see the results in the log of **Result.json.**
 
 ![load script](/img/development/custom-tasks/createUpdateTPA/result.png)
 
 :::info bear in mind
+
 - You will be notified with an error if any field is wrong or with a success message if it has been executed correctly.
 
 :::
@@ -76,9 +82,11 @@ Creating a new TPA with the template called "template" for the project with proj
 ---
 
 ## Technical details
+
 This section explains line by line the **createOrUpdateClassTPA** [script.js](https://github.com/governify/assets-bluejay/blob/main/public/director/tasks/utils/createOrUpdateClassTPA/script.js).
 
 **Imports:** axios and governify commons to be able to make requests to the endpoints.
+
 ```js showLineNumbers
 "use strict";
 const governify = require('governify-commons');
@@ -86,6 +94,7 @@ const axios = require('axios');
 ```
 
 **Checks:** Checking that all specified parameters are correct.
+
 ```js showLineNumbers
 module.exports.main = async (config) => {
 
@@ -130,11 +139,3 @@ module.exports.main = async (config) => {
     }
 }
 ```
-
-
-
-
-
-
-
-

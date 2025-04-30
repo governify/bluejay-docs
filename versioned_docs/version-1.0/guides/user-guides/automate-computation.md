@@ -26,6 +26,7 @@ Info buttons are displayed in gray and provide access to useful information such
 ### Action Buttons
 
 Action buttons allow you to enable or disable specific actions. Currently, the available actions are:
+
 - **TPA Calculation**: Schedules periodic (every hour) calculations of TPA adherence for a team.
 - **Email**: Schedules an email with the results, typically sent once per day.
 - **Slack**: Schedules a Slack message with the results, typically sent once per day.
@@ -33,6 +34,7 @@ Action buttons allow you to enable or disable specific actions. Currently, the a
 ### Course Action Button
 
 The course action button enables or disables all action buttons for projects within the course. There are four possible states:
+
 - **Disabled (Gray)**: No projects are available.
 - **Red**: No project has this function active.
 - **Orange**: Some projects have this function active.
@@ -41,6 +43,7 @@ The course action button enables or disables all action buttons for projects wit
 ### Project Action Button
 
 The project action button enables or disables the action for a specific project. The states are:
+
 - **Disabled (Gray)**: The action cannot be performed (no TPA, email, or Slack available).
 - **Red**: The action is turned off.
 - **Green**: The action is scheduled.
@@ -52,6 +55,7 @@ Each course has settings for calculations. By default, calculations are turned o
 &nbsp;
 
 The settings include:
+
 - **Autorun Option**: Automatically turns on calculations for each new team that joins via the join page.
 - **Initial Time**: Specifies when TPA calculations should start, which can be set to a future date.
 - **End Time**: Specifies when calculations should stop, even if toggled on.
@@ -59,8 +63,3 @@ The settings include:
 ### Notifications
 
 Notifications can be configured by clicking the notification button (a bell icon). Here, you can edit intervals and specify admin emails/notifications.
-
-
-
-
-

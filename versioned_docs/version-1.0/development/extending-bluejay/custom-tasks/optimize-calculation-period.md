@@ -10,7 +10,6 @@ hide_table_of_contents: false
 ---
 Bluejay has an automatic calculation system for its TPAs. However, fetching data and calculating metrics for a course consisting of numerous teams can lead to performance issues.
 
-
 The **"Optimize Calculation Period"** script aims to resolve the challenge of multiple automatic calculations triggering simultaneously within a course.
 It achieves this by **evenly distributing** the execution times for these calculations across a given period of time.
 
@@ -19,11 +18,11 @@ This script is one of the [Custom Tasks of Extending Governify](https://docs.gov
 In this document, we will discuss how to load, configure, and run the script from the user interface. If you want to see the inner workings of this script, we will provide an explanation of the technical details in the last section.
 
 ## Load Optimize Calculation Period
-1. Go to  ***ui.bluejay.[YourDomain]*** 
+
+1. Go to  ***ui.bluejay.[YourDomain]***
 2. Click on Admin UI
 3. Click on the Task Runner tab
 4. Open the dropdown and select **optimizeCalculationPeriod.**
-
 
 ![load optimize](/img/development/custom-tasks/optimize/load-optimize.png)
 
@@ -31,19 +30,17 @@ In this document, we will discuss how to load, configure, and run the script fro
 
 Let's have a look at the Configuration.json parameters:
 
-- **filenameMustIncludeAll**: *string array*.    
-> This field specifies the substrings that must be included in the filenames of computation tasks in the director's folder inside the Bluejay assets. This can be used to filter the tasks by courseName, year, etc. Example name of the files: `tpa-class01-GH-motero2k_Bluejay-test-TPA-23-24.json`
-- **startingTime**: *string*. 
-> The starting time in 24-hour format (HH:mm) from which the calculations should begin for the teams selected.
+- **filenameMustIncludeAll**: *string array*.
+  > This field specifies the substrings that must be included in the filenames of computation tasks in the director's folder inside the Bluejay assets. This can be used to filter the tasks by courseName, year, etc. Example name of the files: `tpa-class01-GH-motero2k_Bluejay-test-TPA-23-24.json`
+- **startingTime**: *string*.
+  > The starting time in 24-hour format (HH:mm) from which the calculations should begin for the teams selected.
 - **endingTime**: *string*.
-> The ending time in 24-hour format (HH:mm) by which all calculations should be completed.
+  > The ending time in 24-hour format (HH:mm) by which all calculations should be completed.
 - **batchSize**: *int*.
-> This field indicates the number of teams that can be activated at the same time.
-
-
-
+  > This field indicates the number of teams that can be activated at the same time.
 
 **Example:** **5 teams** in a course `class01` with activated automatic calculations at any time. The script with the following configuration will distribute evenly the calculations between `14:00` and `16:00` in batches of `2` teams each.
+
 ```json
 {
     "filenameMustIncludeAll": ["tpa-","class01"],
@@ -52,6 +49,7 @@ Let's have a look at the Configuration.json parameters:
     "batchSize": 2
 }
 ```
+
 ```txt
 -----------------------------------------
 expected result:
@@ -63,10 +61,9 @@ batch2 15:00 -> Team3 and Team4
 batch3 16:00 -> Team5 
 ```
 
-
 ## Run the script
-**Click run** and you will see the results in the log of **Result.json:** 
 
+**Click run** and you will see the results in the log of **Result.json:**
 
 ```json
 {
@@ -91,11 +88,13 @@ batch3 16:00 -> Team5
 ```
 
 :::info bear in mind
+
 - You can check the new dates in the **Task Management** tab
 - If you want to execute this script again, you must **turn off and on all automatic calculations in the course** (this resets the launch times to default).
 - Bluejay use `tpa-` prefix for the automatic agreements calculations, so it is recommended to use this prefix in the filenameMustIncludeAll field.
 
 :::
+
 ---
 
 ## Technical details
@@ -103,6 +102,7 @@ batch3 16:00 -> Team5
 This section explains line by line the **optimizeCalculationPeriod** [script.js](https://github.com/governify/assets-bluejay/blob/main/public/director/tasks/utils/optimizeCalculationPeriod/script.js).
 
 **Imports:** fs for file writing, path for joining strings as paths and moment to modify the dates.
+
 ```js showLineNumbers
 "use strict";
 
@@ -110,7 +110,9 @@ const fs = require('fs');
 const path = require('path');
 const moment = require('moment');
 ```
+
 **These lines belong to the [script.js template](https://github.com/governify/assets-bluejay/blob/main/public/director/tasks/examples/template/script.js).** This is necessary to execute a custom task a receive a result in the UI:
+
 ```js showLineNumbers
 
 module.exports.main = async (config) => {
@@ -121,7 +123,9 @@ module.exports.main = async (config) => {
   try {
     //SCRIPT BEGIN
 ```
+
 **Config variables**: Extracting and validating the configuration variables.
+
 ```js showLineNumbers
     const batchSize = config.batchSize
     const startingTimeZstring = config.startingTime
@@ -137,6 +141,7 @@ module.exports.main = async (config) => {
     if(typeof batchSize != "number" ) throw new Error("BatchSize must be number")
     if(batchSize<1 || 20<  batchSize) throw new Error("BatchSize out of bounds [0,20]")
 ```
+
 **Parsing time variables and searching for JSON files.**
 
 The json files (active calculations) are searched in the tasks folder of the bluejay assets. The files are filtered by the filenameMustIncludeAll strings.
@@ -160,7 +165,9 @@ The json files (active calculations) are searched in the tasks folder of the blu
     log("Active computations: ")
     log(jsonFilesNames)
 ```
+
 **Determining the number of batches and the time interval between them.**
+
 ```js showLineNumbers
     if(batchSize > jsonFilesNames.length) throwError(`batch number too big (${batchSize}) for ${jsonFilesNames.length} groups`)
     const numberOfBatchs =  Math.ceil(jsonFilesNames.length / batchSize)
@@ -169,7 +176,9 @@ The json files (active calculations) are searched in the tasks folder of the blu
     const timeBetweenRuns = (endingTime.diff(startingTime) / numberOfBatchsNormalized);
     log(`${jsonFilesNames.length} files in groups of ${batchSize} = ${numberOfBatchs} ,minutesBetweenRuns: ${timeBetweenRuns/60000} minutes`)
 ```
+
 **Adjusting the NEW initial and end dates for each computation task.**
+
 ```js showLineNumbers
     jsonFilesNames.forEach((file, index) => {
       const fullFilePath = path.join(currentDirectory, file+".json");

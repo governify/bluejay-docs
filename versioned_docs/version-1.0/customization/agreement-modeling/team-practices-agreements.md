@@ -81,6 +81,7 @@ Example:
 Contains the information about which services should be used to compute the metrics.
 
 In order to retrieve the data and communicate to the different microservices of the Governify ecosystem, the URLs where each component will be deployed should be specified. This should be done in the infrastructure object, as the following example:
+
 ```json
 {
     "infrastructure": {
@@ -97,6 +98,7 @@ In order to retrieve the data and communicate to the different microservices of 
 
 The most important part in the definitions is the scope. The scope defines for which service/person/process applies the metric.
 If we want to measure a company, we can have for example 3 scopes.
+
 - Project
 - Team
 - Member
@@ -218,7 +220,7 @@ You can see a complete guide about metric modelling in the [Metrics section](/cu
 
 #### Guarantees
 
-The guarantees specify the quality or performance that the metrics should have. The objective is a formula that can be composed from one or more metrics. The window object refers to the calculation timing, where the period is used for how the period of time are splitted in time. 
+The guarantees specify the quality or performance that the metrics should have. The objective is a formula that can be composed from one or more metrics. The window object refers to the calculation timing, where the period is used for how the period of time are splitted in time.
 
 For example for a daily period there will be one data point for each day, and the metric is calculated from all the data from that day. This is an example using the metric from the previous example:
 
