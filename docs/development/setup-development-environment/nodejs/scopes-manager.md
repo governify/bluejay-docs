@@ -3,6 +3,19 @@ title: Scope-Manager
 description: Scope-Manager deployed locally
 sidebar_position: 2 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - Scope-Manager
+  - local deployment
+  - microservices
+  - Docker Compose
+  - system deployment
+  - GitHub clone
+  - development
+  - Node.js
+  - npm install
+  - infrastructure
+  - feature development
+  - Docker
 ---
 
 # Deploying Scope-Manager with NodeJS

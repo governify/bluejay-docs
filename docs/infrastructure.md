@@ -3,6 +3,31 @@ title: Infrastructure
 description: Infrastructure
 sidebar_position: 2 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: True
+keywords:
+  - Bluejay infrastructure
+  - Bluejay services
+  - Bluejay components
+  - Docker images
+  - Local ports
+  - DNS configuration
+  - Bluejay GitHub repositories
+  - Bluejay assets repository
+  - Bluejay service ports
+  - Bluejay production version
+  - Docker container setup
+  - Bluejay render
+  - Bluejay dashboard
+  - Bluejay reporter
+  - Bluejay registry
+  - Bluejay director
+  - Bluejay scope manager
+  - Bluejay join service
+  - Bluejay TPA Manager
+  - Bluejay collector-events
+  - Bluejay database services
+  - MongoDB
+  - InfluxDB
+  - Redis
 ---
 
 # Infrastructure

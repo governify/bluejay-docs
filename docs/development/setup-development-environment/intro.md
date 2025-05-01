@@ -3,6 +3,22 @@ title: Setup Development Environment
 description: Setup Development Environment
 sidebar_position: 1 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - development environment
+  - setup
+  - Docker Compose
+  - Nodejs
+  - system deployment
+  - microservices
+  - local deployment
+  - ports configuration
+  - bluejay infrastructure
+  - bluejay services
+  - deployment methods
+  - Docker
+  - Node.js setup
+  - infrastructure
+  - deployment guide
 ---
 
 # Setup Development Environment

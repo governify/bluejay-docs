@@ -3,6 +3,26 @@ title: Metrics
 description: Metrics
 hide_table_of_contents: false
 sidebar_position: 2 # Sets this doc to the third position in the sidebar
+keywords:
+  - metrics
+  - iAgree
+  - event collector
+  - GitHub
+  - Pivotal Tracker
+  - Travis CI
+  - CodeClimate
+  - Heroku
+  - JSON DSL
+  - software monitoring
+  - percentage metrics
+  - correlation metrics
+  - STDev
+  - coverage
+  - releases
+  - builds
+  - API
+  - data sources
+  - performance indicators
 ---
 
 # Metrics

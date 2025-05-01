@@ -3,7 +3,22 @@ title: TPA Manager
 description: A management system for Team Practice Agreements
 hide_table_of_contents: false
 sidebar_position: 1
-
+keywords:
+  - TPA Manager
+  - Team Practice Agreements
+  - Vue.js 3
+  - TPA templates
+  - Bluejay infrastructure
+  - registry service
+  - scopes manager
+  - microservices configuration
+  - authorization key
+  - template cloning
+  - template structure
+  - course management
+  - project agreements
+  - bluejayInfra.js
+  - environment variables
 ---
 
 # TPA Manager

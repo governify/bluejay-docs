@@ -3,6 +3,29 @@ title: Using Slack Hooks
 description: Register Slack Hooks
 sidebar_position: 4 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - Slack integration
+  - Slack webhook
+  - Bluejay notifications
+  - admin notifications
+  - student notifications
+  - team notifications
+  - Slack setup
+  - webhook configuration
+  - Bluejay TPA Manager
+  - course notifications
+  - frequency settings
+  - team communication
+  - Slack reports
+  - Bluejay alerts
+  - info.yml configuration
+  - course management
+  - course admin panel
+  - project notifications
+  - Slack for teams
+  - student report notifications
+  - notification panel
+  - toggle notifications
 ---
 
 # Using Slack Hooks

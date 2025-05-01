@@ -3,6 +3,29 @@ title: Automate Computation
 description: Register Slack Hooks
 sidebar_position: 3
 hide_table_of_contents: false
+keywords:
+  - automate computation
+  - TPA Manager
+  - course management
+  - periodic calculations
+  - TPA adherence
+  - email notifications
+  - Slack notifications
+  - action buttons
+  - project actions
+  - course actions
+  - notification settings
+  - course settings
+  - automate calculations
+  - notifications
+  - Slack hooks
+  - course edit
+  - manage projects
+  - team calculations
+  - periodic TPA calculation
+  - project management
+  - automation
+  - Bluejay TPA
 ---
 
 # Automate Computation

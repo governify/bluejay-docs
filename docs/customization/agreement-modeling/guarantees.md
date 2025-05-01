@@ -3,6 +3,22 @@ title: Guarantees
 description: Guarantees
 hide_table_of_contents: false
 sidebar_position: 3 # Sets this doc to the third position in the sidebar
+keywords:
+  - guarantees
+  - iAgree
+  - metrics
+  - objective
+  - scope
+  - window
+  - software auditing
+  - GitHub
+  - Pivotal Tracker
+  - team behavior
+  - DSL
+  - percentage
+  - static period
+  - project monitoring
+  - TPA
 ---
 
 # Guarantees

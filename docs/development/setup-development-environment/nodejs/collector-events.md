@@ -3,6 +3,21 @@ title: Collector-Events
 description: Collector-Events deployed locally
 sidebar_position: 1 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - Collector-Events
+  - NodeJS
+  - Docker Compose
+  - Scope-Manager
+  - microservice
+  - development
+  - feature development
+  - GitHub clone
+  - npm
+  - infrastructure
+  - deploy locally
+  - governance
+  - development environment
+  - dependencies
 ---
 
 # Deploying Collector-Events with NodeJS

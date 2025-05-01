@@ -3,6 +3,22 @@ title: Team Practices Agreements
 description: Team Practices Agreements
 sidebar_position: 1 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - TPA
+  - Team Practices Agreements
+  - iAgree
+  - agreement modeling
+  - agile auditing
+  - metrics
+  - guarantees
+  - scope
+  - dashboard
+  - JSON agreement
+  - YAML agreement
+  - event collector
+  - infrastructure
+  - Governify
+  - Bluejay
 ---
 
 # Team Practices Agreements (TPA)

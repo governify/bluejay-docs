@@ -3,6 +3,7 @@ title: Collecting New Metrics
 description: This section explains how to collect new metrics in Governify.
 hide_table_of_contents: false
 # sidebar_class_name: external-link::github.com/governify/collector-events/blob/main/DEVELOPING%20METRICS.md # Use this format for external links
+keywords: [metrics, collection, API, Bluejay, Governify, TPA, monitoring, Github, pull requests, event-collector, standard deviation, percentage, average, audit, software metrics, development, continuous improvement]
 ---
 
 # Collecting new metrics

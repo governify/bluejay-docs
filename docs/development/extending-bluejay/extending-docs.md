@@ -2,6 +2,21 @@
 title: Extending Bluejay documentation
 description: This section explains how to extend Bluejay documentation.
 hide_table_of_contents: false
+keywords:
+  - Bluejay
+  - documentation
+  - contribute
+  - contribution process
+  - fork repository
+  - conventional commits
+  - images in documentation
+  - versioned docs
+  - Docusaurus
+  - Bluejay documentation
+  - project setup
+  - repository setup
+  - Markdown style
+  - documentation improvements
 ---
 
 # Extending Bluejay documentation

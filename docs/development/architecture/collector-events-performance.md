@@ -3,6 +3,21 @@ title: Collector-events performance
 description: Collector-events performance
 hide_table_of_contents: false
 sidebar_position: 1
+keywords:
+  - collector-events
+  - performance analysis
+  - tpa guarantees
+  - calculation time
+  - repository activity
+  - event collector
+  - performance slowdown
+  - collector restart
+  - computation time
+  - ISPP-2024
+  - manual calculations
+  - automatic calculations
+  - collector stability
+  - performance issues
 ---
 
 # Collector-events performance

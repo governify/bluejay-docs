@@ -3,6 +3,23 @@ title: Optimize Calculation Period
 description: Optimize
 sidebar_position: 4 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - Bluejay
+  - optimize calculation period
+  - TPA optimization
+  - batch processing
+  - task runner
+  - custom tasks
+  - Bluejay assets
+  - computation scheduling
+  - task management
+  - automatic calculations
+  - script configuration
+  - JSON files processing
+  - performance optimization
+  - Governify
+  - bluejay tasks
+  - date adjustment
 ---
 
 # Optimize Calculation Period

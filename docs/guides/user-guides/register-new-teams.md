@@ -3,6 +3,30 @@ title: Register New Teams
 description: Register New Teams
 sidebar_position: 2 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - register teams
+  - team registration
+  - TPA Manager
+  - Bluejay services
+  - scopes.json
+  - course join
+  - GitHub repository
+  - info.yml file
+  - automated registration
+  - joinCode
+  - simplified register
+  - course registration
+  - team dashboard
+  - course enrollment
+  - director script
+  - team badges
+  - course joinCode
+  - join service
+  - team project registration
+  - GitHub integration
+  - team self-registration
+  - project join
+  - Bluejay Join
 ---
 
 # Register New Teams

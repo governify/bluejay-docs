@@ -3,6 +3,19 @@ title: Nodejs
 description: Nodejs deployed locally
 sidebar_position: 2 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - Nodejs
+  - local deployment
+  - microservices
+  - Docker Compose
+  - system deployment
+  - Visual Studio Code
+  - Node.js installation
+  - development environment
+  - testing
+  - production environment
+  - extend microservices
+  - Docker
 ---
 
 # Nodejs Deployment

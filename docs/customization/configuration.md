@@ -3,6 +3,22 @@ title: Configuration
 description: Configuration
 sidebar_position: 1 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - configuration
+  - Bluejay
+  - environment variables
+  - .env
+  - scopes.json
+  - API keys
+  - scope manager
+  - team data
+  - event collector
+  - tokens
+  - project tracking
+  - auditing
+  - Governify
+  - credentials
+  - identity management
 ---
 
 # Configuration

@@ -1,8 +1,24 @@
 ---
 title: Kubernetes
 description: Kubernetes
-sidebar_position: 3 # Sets this doc to the first position in the sidebar
+sidebar_position: 3 # Sets this doc to the third position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - kubernetes
+  - helm
+  - governify falcon
+  - governify bluejay
+  - kubernetes deployment
+  - helm charts
+  - cert-manager
+  - contour ingress
+  - values.yaml
+  - minikube
+  - production deployment
+  - local development
+  - nodeport
+  - kubectl
+  - k8s cluster
 ---
 
 # Kubernetes Deployment Governify-Falcon

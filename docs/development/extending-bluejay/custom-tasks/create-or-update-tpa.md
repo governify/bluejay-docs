@@ -1,8 +1,25 @@
 ---
 title: Create or Update TPA 
 description: Create or Update TPA 
-sidebar_position: 4 # Sets this doc to the first position in the sidebar
+sidebar_position: 4
 hide_table_of_contents: false
+keywords:
+  - TPA creation
+  - TPA update
+  - Bluejay
+  - createOrUpdateClassTPA
+  - Governify custom tasks
+  - TPA script
+  - agreement management
+  - TPA templates
+  - task runner
+  - project agreements
+  - script configuration
+  - replace TPA
+  - create TPA
+  - assets-bluejay
+  - registry service
+  - technical implementation
 ---
 
 # Update TPA for a class
@@ -77,6 +94,7 @@ Creating a new TPA with the template called "template" for the project with proj
 ![load script](/img/development/custom-tasks/createUpdateTPA/result.png)
 
 :::info bear in mind
+
 - You will be notified with an error if any field is wrong or with a success message if it has been executed correctly.
 :::
 

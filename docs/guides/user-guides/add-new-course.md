@@ -3,6 +3,25 @@ title: Add new course
 description: How to add a new course to the platform using TPA Manager
 sidebar_position: 1 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - add new course
+  - TPA Manager
+  - course creation
+  - templates
+  - course details
+  - course enrollment
+  - join code
+  - automatic TPA
+  - team registration
+  - course configuration
+  - TPA calculations
+  - course visibility
+  - template creation
+  - Bluejay Zoo
+  - template upload
+  - course management
+  - educational platform
+  - team management
 ---
 
 # Add a new course with TPA Manager

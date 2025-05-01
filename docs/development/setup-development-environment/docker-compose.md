@@ -3,6 +3,21 @@ title: Docker Compose
 description: Docker Compose deployed locally
 sidebar_position: 1 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - Docker Compose
+  - local deployment
+  - bluejay
+  - development environment
+  - GitHub token
+  - Docker
+  - Docker images
+  - TPA
+  - Grafana
+  - container management
+  - scopes.json
+  - bluejay infrastructure
+  - development
+  - system deployment
 ---
 
 # Docker Compose Deployment

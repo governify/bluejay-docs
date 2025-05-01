@@ -3,6 +3,7 @@ title: Adding New Sources
 description: Adding new sources to Governify.
 hide_table_of_contents: false
 # sidebar_class_name: external-link::github.com/governify/collector-events/blob/main/CONTRIBUTING.md
+keywords: [APIs, Bluejay, Collector-events, GitHub, TPA, Metrics, Integration, Fetcher, Repository, Pull Requests, JSON, Event Collector, GitHub API, Development, Tutorial, Scopes, Authentication, Event Type, API Integration, Metrics Design, Governance]
 ---
 
 # Adding new sources

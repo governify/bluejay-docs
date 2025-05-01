@@ -3,6 +3,23 @@ title: Docker Compose
 description: Docker Compose
 sidebar_position: 1 # Sets this doc to the first position in the sidebar
 hide_table_of_contents: false
+keywords:
+  - docker
+  - docker-compose
+  - Bluejay deployment
+  - nginx proxy
+  - infrastructure
+  - production setup
+  - environment variables
+  - .env file
+  - scope manager
+  - DNS setup
+  - SSL certificates
+  - letsencrypt
+  - advanced deployment
+  - setup wizard
+  - system deployment
+  - reverse proxy
 ---
 
 # Docker Compose Production Deployment
