@@ -1,0 +1,7 @@
+position: 1 # Sets this category to the second position in the sidebar
+label: 'Architecture'
+collapsible: true
+collapsed: true
+link:
+  type: doc
+  id: intro 
